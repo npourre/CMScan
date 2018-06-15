@@ -38,7 +38,7 @@ private:
   G4ParticleGun* particleGun;
   CRYGenerator* gen;
   G4int InputState;
-  CMTScanPrimaryGeneratorMessenger* gunMessenger;
+//  CMTScanPrimaryGeneratorMessenger* gunMessenger;
 
   static G4double TimeSimulated;
 };

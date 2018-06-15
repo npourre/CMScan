@@ -49,6 +49,8 @@ globals.hh
 ../include/globals.hh
 G4ThreeVector.hh
 ../include/G4ThreeVector.hh
+GeometryVariable.hh
+../include/GeometryVariable.hh
 map
 -
 
@@ -128,7 +130,7 @@ CMTScanTrackerHit.hh
 vector
 -
 
-../include/Constants.hh
+../include/GeometryVariable.hh
 globals.hh
 ../include/globals.hh
 G4SystemOfUnits.hh
@@ -6389,8 +6391,8 @@ CMTScanDetectorConstruction.hh
 /home/vallois/thesis/CMTScan/CMTScan/src/CMTScanDetectorConstruction.hh
 CMTScanTrackerSD.hh
 /home/vallois/thesis/CMTScan/CMTScan/src/CMTScanTrackerSD.hh
-Constants.hh
-/home/vallois/thesis/CMTScan/CMTScan/src/Constants.hh
+GeometryVariable.hh
+/home/vallois/thesis/CMTScan/CMTScan/src/GeometryVariable.hh
 G4RunManager.hh
 /home/vallois/thesis/CMTScan/CMTScan/src/G4RunManager.hh
 G4NistManager.hh
@@ -6425,14 +6427,12 @@ G4SystemOfUnits.hh
 /home/vallois/thesis/CMTScan/CMTScan/src/CMTScanPrimaryGeneratorAction.cc
 CMTScanPrimaryGeneratorAction.hh
 /home/vallois/thesis/CMTScan/CMTScan/src/CMTScanPrimaryGeneratorAction.hh
-Constants.hh
-/home/vallois/thesis/CMTScan/CMTScan/src/Constants.hh
+GeometryVariable.hh
+/home/vallois/thesis/CMTScan/CMTScan/src/GeometryVariable.hh
 G4Event.hh
 /home/vallois/thesis/CMTScan/CMTScan/src/G4Event.hh
 
 /home/vallois/thesis/CMTScan/CMTScan/src/CMTScanPrimaryGeneratorMessenger.cc
-CMTScanPrimaryGeneratorMessenger.hh
-/home/vallois/thesis/CMTScan/CMTScan/src/CMTScanPrimaryGeneratorMessenger.hh
 CMTScanPrimaryGeneratorAction.hh
 /home/vallois/thesis/CMTScan/CMTScan/src/CMTScanPrimaryGeneratorAction.hh
 G4UIdirectory.hh

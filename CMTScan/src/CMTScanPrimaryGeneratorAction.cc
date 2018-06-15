@@ -1,9 +1,9 @@
 #include "CMTScanPrimaryGeneratorAction.hh"
-#include "Constants.hh"
+#include "GeometryVariable.hh"
 #include "G4Event.hh"
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
-
+//TODO virer le messsenger
 CMTScanPrimaryGeneratorAction::CMTScanPrimaryGeneratorAction(const char *inputfile){
 	// define a particle gun
 	particleGun = new G4ParticleGun();  
@@ -44,14 +44,14 @@ CMTScanPrimaryGeneratorAction::CMTScanPrimaryGeneratorAction(const char *inputfi
 	particleTable = G4ParticleTable::GetParticleTable();
 
 	// Create the messenger file
-	gunMessenger = new CMTScanPrimaryGeneratorMessenger(this);
+//	gunMessenger = new CMTScanPrimaryGeneratorMessenger(this);
 }
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
 CMTScanPrimaryGeneratorAction::~CMTScanPrimaryGeneratorAction()
 {
-	delete gunMessenger;
+//	delete gunMessenger;
 	delete particleGun;
 	delete gen;
 	delete vect;
@@ -112,7 +112,7 @@ void CMTScanPrimaryGeneratorAction::CRYFromFile(G4String newValue)
 
     // set random number generator
     RNGWrapper<CLHEP::HepRandomEngine>::set(CLHEP::HepRandom::getTheEngine(), &CLHEP::HepRandomEngine::flat);
-    setup->setRandomFunction(RNGWrapper<CLHEsP::HepRandomEngine>::rng);
+    setup->setRandomFunction(RNGWrapper<CLHEP::HepRandomEngine>::rng);
     InputState = 0;
   }
 }
@@ -126,7 +126,11 @@ G4double CMTScanPrimaryGeneratorAction::TimeSimulated = 0;
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 void CMTScanPrimaryGeneratorAction::GeneratePrimaries(G4Event *anEvent)
 {
-    //TODO supprimer/modifier le fichier constants pour que les valeurs soit celle du json
+    GeometryVariable *_geometryVariable = GeometryVariable::instance();
+    G4double Detector_Size_X = _geometryVariable->getDetectorSize().getX();
+    G4double Detector_Size_Y = _geometryVariable->getDetectorSize().getY();
+    G4double Detector_Size_Z = _geometryVariable->getDetectorSize().getZ();
+
 	if (InputState != 0){
         auto *str = new G4String("CRY library was not successfully initialized");
 		G4Exception("PrimaryGeneratorAction", "1", RunMustBeAborted, *str);

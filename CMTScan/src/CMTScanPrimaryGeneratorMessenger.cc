@@ -1,11 +1,11 @@
-#include "CMTScanPrimaryGeneratorMessenger.hh"
+/*#
+ * include "CMTScanPrimaryGeneratorMessenger.hh"
 #include "CMTScanPrimaryGeneratorAction.hh"
 
 #include "G4UIdirectory.hh"
 #include "G4UIcmdWithAString.hh"
 #include "G4UIcmdWithoutParameter.hh"
 
-//....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
 CMTScanPrimaryGeneratorMessenger::CMTScanPrimaryGeneratorMessenger(CMTScanPrimaryGeneratorAction* Gun) : Action(Gun)
 {
@@ -30,7 +30,6 @@ CMTScanPrimaryGeneratorMessenger::CMTScanPrimaryGeneratorMessenger(CMTScanPrimar
 
 }
 
-//....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
 CMTScanPrimaryGeneratorMessenger::~CMTScanPrimaryGeneratorMessenger()
 {
@@ -40,8 +39,6 @@ CMTScanPrimaryGeneratorMessenger::~CMTScanPrimaryGeneratorMessenger()
   	delete FileCmd;
   	delete MessInput;
 }
-
-//....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
 void CMTScanPrimaryGeneratorMessenger::SetNewValue(G4UIcommand* command, G4String newValue)
 { 
@@ -65,3 +62,4 @@ void CMTScanPrimaryGeneratorMessenger::SetNewValue(G4UIcommand* command, G4Strin
 }
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
+*/

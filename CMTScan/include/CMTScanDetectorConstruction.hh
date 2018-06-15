@@ -4,6 +4,7 @@
 #include "G4VUserDetectorConstruction.hh"
 #include "globals.hh"
 #include "G4ThreeVector.hh"
+#include "GeometryVariable.hh"
 #include <map>
 
 class G4VPhysicalVolume;
@@ -23,6 +24,7 @@ public:
 private:
     static std::map<int, G4ThreeVector> _geometryMap;
     std::string _geometryFile;
+    GeometryVariable *_geometryVariable;
 };
 #endif
 

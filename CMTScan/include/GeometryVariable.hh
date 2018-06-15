@@ -4,12 +4,6 @@
 #include "globals.hh"
 #include "G4SystemOfUnits.hh"
 
-//TODO prendre en compte le json
-//TODO cree un singleton pour remplacer ca.
-	const G4int Nb_Of_RPC = 4; // Nombre de RPC par calo
-	const G4double Dist_Mid = 34.6*cm; // Distance entre les calo
-	const G4double Dist_RPC = 3.6*cm; // Distance entre les RPC dans un calo
-	
 	const G4double RPC_Chip_Th = 1.6*mm;
 	const G4double RPC_PCB_Th = 1.2*mm;
 	const G4double RPC_MylarAnode_Th = 0.05*mm;
@@ -34,12 +28,34 @@
 	
 	const G4double RPC_Th = RPC_K7T_Th + RPC_Inner_Th + RPC_K7B_Th;
 
-	const G4double Detector_Size_X = 1*m;
-	const G4double Detector_Size_Y = 1*m;
-	const G4double Detector_Size_Z = ((Nb_Of_RPC * RPC_Th) + (Dist_RPC*(Nb_Of_RPC-1)) + Dist_Mid + (Nb_Of_RPC * RPC_Th) + (Dist_RPC*(Nb_Of_RPC-1)));
+class GeometryVariable
+{
+private:
+    GeometryVariable(): _world_size{}, _detector_size{} {;}
+    ~GeometryVariable() = default;
 
-	const G4double World_Size_X = Detector_Size_X*1.2;
-	const G4double World_Size_Y = Detector_Size_Y*1.2;
-	const G4double World_Size_Z = Detector_Size_Z*1.2;
+public:
+    inline void setDetectorSize(G4ThreeVector detector_size) {_detector_size = detector_size;}
+    inline void setWorldSize(G4ThreeVector world_size){_world_size = world_size;}
+    inline G4ThreeVector const getWorldSize(){return _world_size;}
+    inline G4ThreeVector const getDetectorSize(){return _detector_size;}
 
+    static GeometryVariable *instance(){
+        if (nullptr == _singleton) {
+            _singleton =  new GeometryVariable;
+        }
+        return _singleton;
+    }
+    static void kill (){
+        if (nullptr != _singleton) {
+            delete _singleton;
+            _singleton = nullptr;
+        }
+    }
+
+private:
+    G4ThreeVector _world_size;
+    G4ThreeVector _detector_size{};
+    static GeometryVariable *_singleton;
+};
 #endif

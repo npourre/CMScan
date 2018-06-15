@@ -1,6 +1,5 @@
 #include "CMTScanDetectorConstruction.hh"
 #include "CMTScanTrackerSD.hh"
-#include "Constants.hh"
 
 #include "G4RunManager.hh"
 #include "G4NistManager.hh"
@@ -17,9 +16,11 @@
 //TODO verifier les dimensions des couches dans le constants.hh et detectorConstruction
 
 std::map<int, G4ThreeVector> CMTScanDetectorConstruction::_geometryMap={};
+GeometryVariable *GeometryVariable::_singleton = nullptr;
 
 CMTScanDetectorConstruction::CMTScanDetectorConstruction() :
-		_geometryFile("/home/vallois/thesis/CMTScan/CMTScan/geometry/geometry.json") {
+		_geometryFile("../geometry/geometry.json") {
+    _geometryVariable=GeometryVariable::instance();
 }
 
 
@@ -156,9 +157,9 @@ G4VPhysicalVolume* CMTScanDetectorConstruction::DefineVolumes() {
 	/////////////////////////////////////////////////////
 
 	G4Box* WorldSol = new G4Box("WorldSol",
-								World_Size_X*0.5,
-								World_Size_Y*0.5,
-								World_Size_Z*0.5);
+								_geometryVariable->getWorldSize().getX()*0.5,
+                                _geometryVariable->getWorldSize().getY()*0.5,
+                                _geometryVariable->getWorldSize().getZ()*0.5);
 
 	G4LogicalVolume* WorldLog = new G4LogicalVolume(WorldSol,
                                                     air,
@@ -177,6 +178,8 @@ G4VPhysicalVolume* CMTScanDetectorConstruction::DefineVolumes() {
 	/// Logical volume : RPC
 	/////////////////////////////////////////////////////
 
+    G4double Detector_Size_X = _geometryVariable->getDetectorSize().getX();
+    G4double Detector_Size_Y = _geometryVariable->getDetectorSize().getY();
 	G4Box* RPC_Sol = new G4Box("RPC_Sol", Detector_Size_X*0.5, Detector_Size_Y*0.5, RPC_Th*0.5);
 	G4LogicalVolume* RPC_Log = new G4LogicalVolume(RPC_Sol, air, "RPC_Log");
 
@@ -249,7 +252,6 @@ G4VPhysicalVolume* CMTScanDetectorConstruction::DefineVolumes() {
 						  true);
 	}
 
-
 /*	/////////////////////////////////////////////////////
 	/// Container
 	/////////////////////////////////////////////////////
@@ -285,7 +287,7 @@ G4VPhysicalVolume* CMTScanDetectorConstruction::DefineVolumes() {
 */
 	/////////////////////////////////////////////////////
 	/// Target
-	/////////////////////////////////////////////////////
+	/////////////////////////////////////////////////////getInstance
 /*
 	G4Trd* Target = new G4Trd("Target",
                               30*cm,
@@ -355,12 +357,23 @@ void CMTScanDetectorConstruction::processGeometry() {
 
     }
 
+    G4double min=1e9;
+    G4double max=-1e9;
 	std::cout<<"-------------------------------------------------"<<std::endl;
-    for ( const auto& it : _geometryMap )
+    for ( const auto& it : _geometryMap ){
+        if(it.second.getZ()>max)
+            max=it.second.getZ();
+        if(it.second.getZ()<min)
+            min=it.second.getZ();
         std::cout<<"Slot "<<it.first<<":\t"<<
 				 it.second.getX()/cm<<" cm\t"<<
 				 it.second.getY()/cm<<" cm\t"<<
 				 it.second.getZ()/cm<<" cm"<<std::endl;
+    }
     std::cout<<"-------------------------------------------------"<<std::endl;
+    G4ThreeVector detector_size(1*m,1*m,max-min+RPC_Th);
+    G4ThreeVector world_size(detector_size*1.2);
+    _geometryVariable->setDetectorSize(detector_size);
+    _geometryVariable->setWorldSize(world_size);
 }
 

@@ -23,10 +23,10 @@
   <component name="ExecutionTargetManager" SELECTED_TARGET="CMakeBuildProfile:Debug" />
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="CMTScan.cc" pinned="false" current-in-tab="false">
+      <file leaf-file-name="CMTScan.cc" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/CMTScan.cc">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="794">
+            <state relative-caret-position="875">
               <caret line="102" column="115" selection-start-line="102" selection-start-column="115" selection-end-line="102" selection-end-column="115" />
               <folding>
                 <element signature="e#1803#1844#0" expanded="true" />
@@ -38,50 +38,13 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="RNGWrapper.hh" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/include/RNGWrapper.hh">
+      <file leaf-file-name="GeometryVariable.hh" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/include/GeometryVariable.hh">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="210">
-              <caret line="14" column="38" selection-start-line="14" selection-start-column="38" selection-end-line="14" selection-end-column="38" />
+            <state relative-caret-position="405">
+              <caret line="27" lean-forward="true" selection-start-line="27" selection-end-line="27" />
               <folding>
-                <element signature="e#8#17#0" expanded="true" />
-                <element signature="e#305#314#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="RNGWrapper.cc" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/RNGWrapper.cc">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="45">
-              <caret line="3" column="22" selection-start-line="3" selection-start-column="22" selection-end-line="3" selection-end-column="22" />
-              <folding>
-                <element signature="e#0#24#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="CMTScanPrimaryGeneratorAction.hh" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/include/CMTScanPrimaryGeneratorAction.hh">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="360">
-              <caret line="24" column="25" selection-start-line="24" selection-start-column="25" selection-end-line="24" selection-end-column="25" />
-              <folding>
-                <element signature="e#83#126#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="CMTScanPrimaryGeneratorAction.cc" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/CMTScanPrimaryGeneratorAction.cc">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2055">
-              <caret line="137" column="73" selection-start-line="137" selection-start-column="73" selection-end-line="137" selection-end-column="73" />
-              <folding>
-                <element signature="e#0#43#0" expanded="true" />
+                <element signature="e#41#62#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -90,8 +53,8 @@
       <file leaf-file-name="CMTScanDetectorConstruction.cc" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/CMTScanDetectorConstruction.cc">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="225">
-              <caret line="15" column="2" selection-start-line="15" selection-start-column="2" selection-end-line="15" selection-end-column="2" />
+            <state relative-caret-position="240">
+              <caret line="16" lean-forward="true" selection-start-line="16" selection-end-line="16" />
               <folding>
                 <element signature="e#0#41#0" expanded="true" />
               </folding>
@@ -99,13 +62,37 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="CMTScanEventAction.cc" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/CMTScanEventAction.cc">
+      <file leaf-file-name="CMTScanDetectorConstruction.hh" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/include/CMTScanDetectorConstruction.hh">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="585">
-              <caret line="45" column="42" selection-start-line="45" selection-start-column="42" selection-end-line="45" selection-end-column="42" />
+            <state relative-caret-position="390">
+              <caret line="26" column="32" selection-start-line="26" selection-end-line="27" />
               <folding>
-                <element signature="e#0#32#0" expanded="true" />
+                <element signature="e#79#120#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="CMTScanPrimaryGeneratorAction.cc" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/CMTScanPrimaryGeneratorAction.cc">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-407">
+              <caret line="142" lean-forward="true" selection-start-line="142" selection-end-line="142" />
+              <folding>
+                <element signature="e#0#43#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="CMTScanPrimaryGeneratorAction.hh" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/include/CMTScanPrimaryGeneratorAction.hh">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="435">
+              <caret line="40" column="2" selection-start-line="40" selection-start-column="2" selection-end-line="40" selection-end-column="2" />
+              <folding>
+                <element signature="e#83#126#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -133,7 +120,6 @@
         <option value="$PROJECT_DIR$/init_vis.mac" />
         <option value="$PROJECT_DIR$/vis.mac" />
         <option value="$PROJECT_DIR$/run1.mac" />
-        <option value="$PROJECT_DIR$/include/CMTScanPrimaryGeneratorAction.hh" />
         <option value="$PROJECT_DIR$/CMTScan.cc" />
         <option value="$PROJECT_DIR$/CMakeLists.txt" />
         <option value="$PROJECT_DIR$/geometry/geometry.json" />
@@ -144,12 +130,16 @@
         <option value="$PROJECT_DIR$/include/CMTScanEventAction.hh" />
         <option value="$PROJECT_DIR$/src/CMTScanRunAction.cc" />
         <option value="$PROJECT_DIR$/src/CMTScanEventAction.cc" />
-        <option value="$PROJECT_DIR$/include/CMTScanDetectorConstruction.hh" />
-        <option value="$PROJECT_DIR$/src/CMTScanDetectorConstruction.cc" />
         <option value="$PROJECT_DIR$/include/RNGWrapper.hh" />
         <option value="$PROJECT_DIR$/src/RNGWrapper.cc" />
-        <option value="$PROJECT_DIR$/src/CMTScanPrimaryGeneratorAction.cc" />
         <option value="$PROJECT_DIR$/include/Constants.hh" />
+        <option value="$PROJECT_DIR$/include/CMTScanPrimaryGeneratorMessenger.hh" />
+        <option value="$PROJECT_DIR$/src/CMTScanPrimaryGeneratorMessenger.cc" />
+        <option value="$PROJECT_DIR$/include/CMTScanPrimaryGeneratorAction.hh" />
+        <option value="$PROJECT_DIR$/include/CMTScanDetectorConstruction.hh" />
+        <option value="$PROJECT_DIR$/include/GeometryVariable.hh" />
+        <option value="$PROJECT_DIR$/src/CMTScanPrimaryGeneratorAction.cc" />
+        <option value="$PROJECT_DIR$/src/CMTScanDetectorConstruction.cc" />
       </list>
     </option>
   </component>
@@ -161,7 +151,7 @@
   </component>
   <component name="OCFindUsagesOptions" text="true" ivars="false" properties="true" derivedClasses="false" />
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="1275" />
+    <option name="x" value="3195" />
     <option name="y" value="26" />
     <option name="width" value="1930" />
     <option name="height" value="1035" />
@@ -171,7 +161,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -193,6 +182,7 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -214,7 +204,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Application.Bash mode">
+  <component name="RunManager" selected="Application.GUI mode">
     <configuration name="Bash mode" type="CMakeRunConfiguration" factoryName="Application" PROGRAM_PARAMS="run1.mac" PASS_PARENT_ENVS_2="true" PROJECT_NAME="CMTScan" TARGET_NAME="CMTScan" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="CMTScan" RUN_TARGET_NAME="CMTScan" />
     <configuration name="GUI mode" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="CMTScan" TARGET_NAME="CMTScan" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="CMTScan" RUN_TARGET_NAME="CMTScan" />
     <list>
@@ -242,11 +232,12 @@
       <workItem from="1528897764247" duration="3193000" />
       <workItem from="1528966387539" duration="230000" />
       <workItem from="1528980953348" duration="614000" />
+      <workItem from="1529046522698" duration="5990000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="47030000" />
+    <option name="totallyTimeSpent" value="53020000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -258,25 +249,25 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="1275" y="26" width="1930" height="1035" extended-state="6" />
+    <frame x="3195" y="26" width="1930" height="1035" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.1889182" />
-      <window_info anchor="bottom" id="TODO" order="6" weight="0.32990867" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.12506597" />
+      <window_info anchor="bottom" id="TODO" order="6" sideWeight="0.49920845" visible="true" weight="0.32990867" />
+      <window_info anchor="bottom" id="Messages" order="7" weight="0.32876712" />
       <window_info anchor="bottom" id="CMake" order="7" weight="0.33105022" />
-      <window_info anchor="bottom" id="Event Log" order="7" sideWeight="0.50026387" side_tool="true" weight="0.32762557" />
+      <window_info anchor="bottom" id="Event Log" order="7" sideWeight="0.50079155" side_tool="true" weight="0.32990867" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32990867" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49973616" weight="0.26712328" />
       <window_info anchor="bottom" id="Version Control" order="7" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49973616" weight="0.26712328" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="bottom" id="Terminal" order="7" weight="0.32990867" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.39954337" />
       <window_info id="Favorites" order="2" side_tool="true" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.39954337" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
-      <window_info anchor="bottom" id="Messages" order="7" weight="0.32876712" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
     </layout>
@@ -342,6 +333,16 @@
     </expressions>
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/src/CMTScanEventAction.cc">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="675">
+          <caret line="45" column="42" selection-start-line="45" selection-start-column="42" selection-end-line="45" selection-end-column="42" />
+          <folding>
+            <element signature="e#0#32#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/include/CMTScanTrackerHit.hh">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="975">
@@ -349,7 +350,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/include/Constants.hh">
+    <entry file="file://$PROJECT_DIR$/include/GeometryVariable.hh">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="525">
           <caret line="35" column="41" lean-forward="true" selection-start-line="35" selection-start-column="41" selection-end-line="35" selection-end-column="41" />
@@ -376,9 +377,6 @@
           <caret line="41" column="77" lean-forward="true" selection-start-line="41" selection-start-column="77" selection-end-line="41" selection-end-column="77" />
         </state>
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/CMTScanActionInitialization.cc">
-      <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="file://$USER_HOME$/ilcsoft/v01-19-05/geant4/10.04.p01/include/Geant4/G4ClassificationOfNewTrack.hh">
       <provider selected="true" editor-type-id="text-editor">
@@ -469,18 +467,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="507">
           <caret line="205" column="10" lean-forward="true" selection-start-line="205" selection-start-column="10" selection-end-line="205" selection-end-column="10" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/CMTScanPrimaryGeneratorMessenger.cc">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-558" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/include/CMTScanPrimaryGeneratorMessenger.hh">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="345">
-          <caret line="24" column="46" lean-forward="true" selection-start-line="24" selection-start-column="46" selection-end-line="24" selection-end-column="46" />
         </state>
       </provider>
     </entry>
@@ -610,23 +596,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/include/CMTScanDetectorConstruction.hh">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="420">
-          <caret line="28" selection-start-line="28" selection-end-line="28" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/include/CMTScanPrimaryGeneratorAction.hh">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="360">
-          <caret line="24" column="25" selection-start-line="24" selection-start-column="25" selection-end-line="24" selection-end-column="25" />
-          <folding>
-            <element signature="e#83#126#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/../cry_v1.7/src/CRYSetup.h">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="170">
@@ -662,52 +631,89 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/include/Constants.hh">
+    <entry file="file://$PROJECT_DIR$/include/CMTScanPrimaryGeneratorMessenger.hh">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="300">
-          <caret line="20" column="49" lean-forward="true" selection-start-line="20" selection-start-column="49" selection-end-line="20" selection-end-column="49" />
+        <state relative-caret-position="510">
+          <caret line="34" column="2" selection-start-line="34" selection-start-column="2" selection-end-line="34" selection-end-column="2" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/CMTScanDetectorConstruction.cc">
+    <entry file="file://$PROJECT_DIR$/src/CMTScanPrimaryGeneratorMessenger.cc">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="225">
-          <caret line="15" column="2" selection-start-line="15" selection-start-column="2" selection-end-line="15" selection-end-column="2" />
-          <folding>
-            <element signature="e#0#41#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="389">
+          <caret line="41" selection-start-line="41" selection-end-line="41" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/CMTScanPrimaryGeneratorAction.cc">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2055">
-          <caret line="137" column="73" selection-start-line="137" selection-start-column="73" selection-end-line="137" selection-end-column="73" />
+        <state relative-caret-position="-407">
+          <caret line="142" lean-forward="true" selection-start-line="142" selection-end-line="142" />
           <folding>
             <element signature="e#0#43#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/CMTScanEventAction.cc">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="295">
+          <caret line="31" column="23" selection-start-line="31" selection-start-column="5" selection-end-line="31" selection-end-column="23" />
+          <folding>
+            <element signature="e#0#32#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/include/CMTScanPrimaryGeneratorAction.hh">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="435">
+          <caret line="40" column="2" selection-start-line="40" selection-start-column="2" selection-end-line="40" selection-end-column="2" />
+          <folding>
+            <element signature="e#83#126#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/include/GeometryVariable.hh">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="405">
+          <caret line="27" lean-forward="true" selection-start-line="27" selection-end-line="27" />
+          <folding>
+            <element signature="e#41#62#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/CMTScanDetectorConstruction.cc">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="240">
+          <caret line="16" lean-forward="true" selection-start-line="16" selection-end-line="16" />
+          <folding>
+            <element signature="e#0#41#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/include/CMTScanDetectorConstruction.hh">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="390">
+          <caret line="26" column="32" selection-start-line="26" selection-end-line="27" />
+          <folding>
+            <element signature="e#79#120#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/CMTScan.cc">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="794">
+        <state relative-caret-position="875">
           <caret line="102" column="115" selection-start-line="102" selection-start-column="115" selection-end-line="102" selection-end-column="115" />
           <folding>
             <element signature="e#1803#1844#0" expanded="true" />
             <element signature="e#1911#1939#0" expanded="true" />
             <element signature="e#1981#2006#0" expanded="true" />
             <element signature="e#2752#2800#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/CMTScanEventAction.cc">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="585">
-          <caret line="45" column="42" selection-start-line="45" selection-start-column="42" selection-end-line="45" selection-end-column="42" />
-          <folding>
-            <element signature="e#0#32#0" expanded="true" />
           </folding>
         </state>
       </provider>

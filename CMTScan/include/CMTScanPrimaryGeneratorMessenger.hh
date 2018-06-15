@@ -1,4 +1,4 @@
-#ifndef CMTScanPrimaryGeneratorMessenger_h
+/*#ifndef CMTScanPrimaryGeneratorMessenger_h
 #define CMTScanPrimaryGeneratorMessenger_h 1
 
 #include "G4UImessenger.hh"
@@ -32,3 +32,4 @@ class CMTScanPrimaryGeneratorMessenger: public G4UImessenger
 
 #endif
 
+*/
