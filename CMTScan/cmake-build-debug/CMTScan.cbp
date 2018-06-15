@@ -1,0 +1,280 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6"/>
+	<Project>
+		<Option title="CMTScan"/>
+		<Option makefile_is_custom="1"/>
+		<Option compiler="gcc"/>
+		<Option virtualFolders="CMake Files\;CMake Files\..\;CMake Files\..\..\;CMake Files\..\..\..\;CMake Files\..\..\..\ilcsoft\;CMake Files\..\..\..\ilcsoft\v01-19-05\;CMake Files\..\..\..\ilcsoft\v01-19-05\geant4\;CMake Files\..\..\..\ilcsoft\v01-19-05\geant4\10.04.p01\;CMake Files\..\..\..\ilcsoft\v01-19-05\geant4\10.04.p01\lib\;CMake Files\..\..\..\ilcsoft\v01-19-05\geant4\10.04.p01\lib\Geant4-10.4.1\;CMake Files\..\..\..\ilcsoft\v01-19-05\geant4\10.04.p01\lib\Geant4-10.4.1\Modules\;CMake Files\..\..\..\ilcsoft\CLHEP\;CMake Files\..\..\..\ilcsoft\CLHEP\2.4.0.0\;CMake Files\..\..\..\ilcsoft\CLHEP\2.4.0.0\lib\;CMake Files\..\..\..\ilcsoft\CLHEP\2.4.0.0\lib\CLHEP-2.4.0.0\;"/>
+		<Build>
+			<Target title="all">
+				<Option working_dir="/home/vallois/thesis/CMTScan/CMTScan/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/home/vallois/ilcsoft/v01-19-05/mysql/usr/bin/make -j4 -f &quot;/home/vallois/thesis/CMTScan/CMTScan/cmake-build-debug/Makefile&quot;  VERBOSE=1 all"/>
+					<CompileFile command="/home/vallois/ilcsoft/v01-19-05/mysql/usr/bin/make -j4 -f &quot;/home/vallois/thesis/CMTScan/CMTScan/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/home/vallois/ilcsoft/v01-19-05/mysql/usr/bin/make -j4 -f &quot;/home/vallois/thesis/CMTScan/CMTScan/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/home/vallois/ilcsoft/v01-19-05/mysql/usr/bin/make -j4 -f &quot;/home/vallois/thesis/CMTScan/CMTScan/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="install/strip">
+				<Option working_dir="/home/vallois/thesis/CMTScan/CMTScan/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/home/vallois/ilcsoft/v01-19-05/mysql/usr/bin/make -j4 -f &quot;/home/vallois/thesis/CMTScan/CMTScan/cmake-build-debug/Makefile&quot;  VERBOSE=1 install/strip"/>
+					<CompileFile command="/home/vallois/ilcsoft/v01-19-05/mysql/usr/bin/make -j4 -f &quot;/home/vallois/thesis/CMTScan/CMTScan/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/home/vallois/ilcsoft/v01-19-05/mysql/usr/bin/make -j4 -f &quot;/home/vallois/thesis/CMTScan/CMTScan/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/home/vallois/ilcsoft/v01-19-05/mysql/usr/bin/make -j4 -f &quot;/home/vallois/thesis/CMTScan/CMTScan/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="install/local">
+				<Option working_dir="/home/vallois/thesis/CMTScan/CMTScan/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/home/vallois/ilcsoft/v01-19-05/mysql/usr/bin/make -j4 -f &quot;/home/vallois/thesis/CMTScan/CMTScan/cmake-build-debug/Makefile&quot;  VERBOSE=1 install/local"/>
+					<CompileFile command="/home/vallois/ilcsoft/v01-19-05/mysql/usr/bin/make -j4 -f &quot;/home/vallois/thesis/CMTScan/CMTScan/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/home/vallois/ilcsoft/v01-19-05/mysql/usr/bin/make -j4 -f &quot;/home/vallois/thesis/CMTScan/CMTScan/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/home/vallois/ilcsoft/v01-19-05/mysql/usr/bin/make -j4 -f &quot;/home/vallois/thesis/CMTScan/CMTScan/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="install">
+				<Option working_dir="/home/vallois/thesis/CMTScan/CMTScan/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/home/vallois/ilcsoft/v01-19-05/mysql/usr/bin/make -j4 -f &quot;/home/vallois/thesis/CMTScan/CMTScan/cmake-build-debug/Makefile&quot;  VERBOSE=1 install"/>
+					<CompileFile command="/home/vallois/ilcsoft/v01-19-05/mysql/usr/bin/make -j4 -f &quot;/home/vallois/thesis/CMTScan/CMTScan/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/home/vallois/ilcsoft/v01-19-05/mysql/usr/bin/make -j4 -f &quot;/home/vallois/thesis/CMTScan/CMTScan/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/home/vallois/ilcsoft/v01-19-05/mysql/usr/bin/make -j4 -f &quot;/home/vallois/thesis/CMTScan/CMTScan/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="list_install_components">
+				<Option working_dir="/home/vallois/thesis/CMTScan/CMTScan/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/home/vallois/ilcsoft/v01-19-05/mysql/usr/bin/make -j4 -f &quot;/home/vallois/thesis/CMTScan/CMTScan/cmake-build-debug/Makefile&quot;  VERBOSE=1 list_install_components"/>
+					<CompileFile command="/home/vallois/ilcsoft/v01-19-05/mysql/usr/bin/make -j4 -f &quot;/home/vallois/thesis/CMTScan/CMTScan/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/home/vallois/ilcsoft/v01-19-05/mysql/usr/bin/make -j4 -f &quot;/home/vallois/thesis/CMTScan/CMTScan/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/home/vallois/ilcsoft/v01-19-05/mysql/usr/bin/make -j4 -f &quot;/home/vallois/thesis/CMTScan/CMTScan/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="rebuild_cache">
+				<Option working_dir="/home/vallois/thesis/CMTScan/CMTScan/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/home/vallois/ilcsoft/v01-19-05/mysql/usr/bin/make -j4 -f &quot;/home/vallois/thesis/CMTScan/CMTScan/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
+					<CompileFile command="/home/vallois/ilcsoft/v01-19-05/mysql/usr/bin/make -j4 -f &quot;/home/vallois/thesis/CMTScan/CMTScan/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/home/vallois/ilcsoft/v01-19-05/mysql/usr/bin/make -j4 -f &quot;/home/vallois/thesis/CMTScan/CMTScan/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/home/vallois/ilcsoft/v01-19-05/mysql/usr/bin/make -j4 -f &quot;/home/vallois/thesis/CMTScan/CMTScan/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="edit_cache">
+				<Option working_dir="/home/vallois/thesis/CMTScan/CMTScan/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/home/vallois/ilcsoft/v01-19-05/mysql/usr/bin/make -j4 -f &quot;/home/vallois/thesis/CMTScan/CMTScan/cmake-build-debug/Makefile&quot;  VERBOSE=1 edit_cache"/>
+					<CompileFile command="/home/vallois/ilcsoft/v01-19-05/mysql/usr/bin/make -j4 -f &quot;/home/vallois/thesis/CMTScan/CMTScan/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/home/vallois/ilcsoft/v01-19-05/mysql/usr/bin/make -j4 -f &quot;/home/vallois/thesis/CMTScan/CMTScan/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/home/vallois/ilcsoft/v01-19-05/mysql/usr/bin/make -j4 -f &quot;/home/vallois/thesis/CMTScan/CMTScan/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="CMTScan">
+				<Option output="/home/vallois/thesis/CMTScan/CMTScan/cmake-build-debug/CMTScan" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/vallois/thesis/CMTScan/CMTScan/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add option="-DG4_STORE_TRAJECTORY"/>
+					<Add option="-DG4VERBOSE"/>
+					<Add option="-DG4UI_USE"/>
+					<Add option="-DG4VIS_USE"/>
+					<Add option="-DG4UI_USE_TCSH"/>
+					<Add option="-DG4INTY_USE_QT"/>
+					<Add option="-DG4UI_USE_QT"/>
+					<Add option="-DG4VIS_USE_OPENGLQT"/>
+					<Add option="-DG4INTY_USE_XT"/>
+					<Add option="-DG4VIS_USE_OPENGLX"/>
+					<Add option="-DG4VIS_USE_OPENGL"/>
+					<Add directory="/home/vallois/ilcsoft/CLHEP/2.4.0.0/lib/CLHEP-2.4.0.0/../../include"/>
+					<Add directory="/home/vallois/thesis/CMTScan/CMTScan/../cry_v1.7/src"/>
+					<Add directory="/home/vallois/rapidjson/include/rapidjson"/>
+					<Add directory="/home/vallois/ilcsoft/v01-19-05/geant4/10.04.p01/include/Geant4"/>
+					<Add directory="/home/vallois/ilcsoft/xercesc/3.2.1/include"/>
+					<Add directory="/home/vallois/ilcsoft/QT/4.8.6/include"/>
+					<Add directory="/home/vallois/ilcsoft/QT/4.8.6/include/QtCore"/>
+					<Add directory="/home/vallois/ilcsoft/QT/4.8.6/include/QtGui"/>
+					<Add directory="/home/vallois/ilcsoft/QT/4.8.6/include/QtOpenGL"/>
+					<Add directory="/home/vallois/thesis/CMTScan/CMTScan/include"/>
+					<Add directory="/home/vallois/ilcsoft/CLHEP/2.4.0.0/include"/>
+					<Add directory="/usr/include/c++/6"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/6"/>
+					<Add directory="/usr/include/c++/6/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/6/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/6/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/home/vallois/ilcsoft/v01-19-05/mysql/usr/bin/make -j4 -f &quot;/home/vallois/thesis/CMTScan/CMTScan/cmake-build-debug/Makefile&quot;  VERBOSE=1 CMTScan"/>
+					<CompileFile command="/home/vallois/ilcsoft/v01-19-05/mysql/usr/bin/make -j4 -f &quot;/home/vallois/thesis/CMTScan/CMTScan/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/home/vallois/ilcsoft/v01-19-05/mysql/usr/bin/make -j4 -f &quot;/home/vallois/thesis/CMTScan/CMTScan/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/home/vallois/ilcsoft/v01-19-05/mysql/usr/bin/make -j4 -f &quot;/home/vallois/thesis/CMTScan/CMTScan/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="CMTScan/fast">
+				<Option output="/home/vallois/thesis/CMTScan/CMTScan/cmake-build-debug/CMTScan" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/vallois/thesis/CMTScan/CMTScan/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add option="-DG4_STORE_TRAJECTORY"/>
+					<Add option="-DG4VERBOSE"/>
+					<Add option="-DG4UI_USE"/>
+					<Add option="-DG4VIS_USE"/>
+					<Add option="-DG4UI_USE_TCSH"/>
+					<Add option="-DG4INTY_USE_QT"/>
+					<Add option="-DG4UI_USE_QT"/>
+					<Add option="-DG4VIS_USE_OPENGLQT"/>
+					<Add option="-DG4INTY_USE_XT"/>
+					<Add option="-DG4VIS_USE_OPENGLX"/>
+					<Add option="-DG4VIS_USE_OPENGL"/>
+					<Add directory="/home/vallois/ilcsoft/CLHEP/2.4.0.0/lib/CLHEP-2.4.0.0/../../include"/>
+					<Add directory="/home/vallois/thesis/CMTScan/CMTScan/../cry_v1.7/src"/>
+					<Add directory="/home/vallois/rapidjson/include/rapidjson"/>
+					<Add directory="/home/vallois/ilcsoft/v01-19-05/geant4/10.04.p01/include/Geant4"/>
+					<Add directory="/home/vallois/ilcsoft/xercesc/3.2.1/include"/>
+					<Add directory="/home/vallois/ilcsoft/QT/4.8.6/include"/>
+					<Add directory="/home/vallois/ilcsoft/QT/4.8.6/include/QtCore"/>
+					<Add directory="/home/vallois/ilcsoft/QT/4.8.6/include/QtGui"/>
+					<Add directory="/home/vallois/ilcsoft/QT/4.8.6/include/QtOpenGL"/>
+					<Add directory="/home/vallois/thesis/CMTScan/CMTScan/include"/>
+					<Add directory="/home/vallois/ilcsoft/CLHEP/2.4.0.0/include"/>
+					<Add directory="/usr/include/c++/6"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/6"/>
+					<Add directory="/usr/include/c++/6/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/6/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/6/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/home/vallois/ilcsoft/v01-19-05/mysql/usr/bin/make -j4 -f &quot;/home/vallois/thesis/CMTScan/CMTScan/cmake-build-debug/Makefile&quot;  VERBOSE=1 CMTScan/fast"/>
+					<CompileFile command="/home/vallois/ilcsoft/v01-19-05/mysql/usr/bin/make -j4 -f &quot;/home/vallois/thesis/CMTScan/CMTScan/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/home/vallois/ilcsoft/v01-19-05/mysql/usr/bin/make -j4 -f &quot;/home/vallois/thesis/CMTScan/CMTScan/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/home/vallois/ilcsoft/v01-19-05/mysql/usr/bin/make -j4 -f &quot;/home/vallois/thesis/CMTScan/CMTScan/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+		</Build>
+		<Unit filename="/home/vallois/thesis/CMTScan/CMTScan/CMTScan.cc">
+			<Option target="CMTScan"/>
+		</Unit>
+		<Unit filename="/home/vallois/thesis/CMTScan/CMTScan/include/CMTScanActionInitialization.hh">
+			<Option target="CMTScan"/>
+		</Unit>
+		<Unit filename="/home/vallois/thesis/CMTScan/CMTScan/include/CMTScanDetectorConstruction.hh">
+			<Option target="CMTScan"/>
+		</Unit>
+		<Unit filename="/home/vallois/thesis/CMTScan/CMTScan/include/CMTScanEventAction.hh">
+			<Option target="CMTScan"/>
+		</Unit>
+		<Unit filename="/home/vallois/thesis/CMTScan/CMTScan/include/CMTScanPrimaryGeneratorAction.hh">
+			<Option target="CMTScan"/>
+		</Unit>
+		<Unit filename="/home/vallois/thesis/CMTScan/CMTScan/include/CMTScanPrimaryGeneratorMessenger.hh">
+			<Option target="CMTScan"/>
+		</Unit>
+		<Unit filename="/home/vallois/thesis/CMTScan/CMTScan/include/CMTScanRunAction.hh">
+			<Option target="CMTScan"/>
+		</Unit>
+		<Unit filename="/home/vallois/thesis/CMTScan/CMTScan/include/CMTScanStackingAction.hh">
+			<Option target="CMTScan"/>
+		</Unit>
+		<Unit filename="/home/vallois/thesis/CMTScan/CMTScan/include/CMTScanTrackerHit.hh">
+			<Option target="CMTScan"/>
+		</Unit>
+		<Unit filename="/home/vallois/thesis/CMTScan/CMTScan/include/CMTScanTrackerSD.hh">
+			<Option target="CMTScan"/>
+		</Unit>
+		<Unit filename="/home/vallois/thesis/CMTScan/CMTScan/include/Constants.hh">
+			<Option target="CMTScan"/>
+		</Unit>
+		<Unit filename="/home/vallois/thesis/CMTScan/CMTScan/include/RNGWrapper.hh">
+			<Option target="CMTScan"/>
+		</Unit>
+		<Unit filename="/home/vallois/thesis/CMTScan/CMTScan/src/CMTScanActionInitialization.cc">
+			<Option target="CMTScan"/>
+		</Unit>
+		<Unit filename="/home/vallois/thesis/CMTScan/CMTScan/src/CMTScanDetectorConstruction.cc">
+			<Option target="CMTScan"/>
+		</Unit>
+		<Unit filename="/home/vallois/thesis/CMTScan/CMTScan/src/CMTScanEventAction.cc">
+			<Option target="CMTScan"/>
+		</Unit>
+		<Unit filename="/home/vallois/thesis/CMTScan/CMTScan/src/CMTScanPrimaryGeneratorAction.cc">
+			<Option target="CMTScan"/>
+		</Unit>
+		<Unit filename="/home/vallois/thesis/CMTScan/CMTScan/src/CMTScanPrimaryGeneratorMessenger.cc">
+			<Option target="CMTScan"/>
+		</Unit>
+		<Unit filename="/home/vallois/thesis/CMTScan/CMTScan/src/CMTScanRunAction.cc">
+			<Option target="CMTScan"/>
+		</Unit>
+		<Unit filename="/home/vallois/thesis/CMTScan/CMTScan/src/CMTScanStackingAction.cc">
+			<Option target="CMTScan"/>
+		</Unit>
+		<Unit filename="/home/vallois/thesis/CMTScan/CMTScan/src/CMTScanTrackerHit.cc">
+			<Option target="CMTScan"/>
+		</Unit>
+		<Unit filename="/home/vallois/thesis/CMTScan/CMTScan/src/CMTScanTrackerSD.cc">
+			<Option target="CMTScan"/>
+		</Unit>
+		<Unit filename="/home/vallois/thesis/CMTScan/CMTScan/src/RNGWrapper.cc">
+			<Option target="CMTScan"/>
+		</Unit>
+		<Unit filename="/home/vallois/thesis/CMTScan/CMTScan/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\"/>
+		</Unit>
+		<Unit filename="/home/vallois/thesis/CMTScan/CMTScan/init_vis.mac">
+			<Option virtualFolder="CMake Files\"/>
+		</Unit>
+		<Unit filename="/home/vallois/thesis/CMTScan/CMTScan/run1.mac">
+			<Option virtualFolder="CMake Files\"/>
+		</Unit>
+		<Unit filename="/home/vallois/thesis/CMTScan/CMTScan/vis.mac">
+			<Option virtualFolder="CMake Files\"/>
+		</Unit>
+		<Unit filename="/home/vallois/thesis/CMTScan/CMTScan/../../../ilcsoft/v01-19-05/geant4/10.04.p01/lib/Geant4-10.4.1/Geant4Config.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\ilcsoft\v01-19-05\geant4\10.04.p01\lib\Geant4-10.4.1\"/>
+		</Unit>
+		<Unit filename="/home/vallois/thesis/CMTScan/CMTScan/../../../ilcsoft/v01-19-05/geant4/10.04.p01/lib/Geant4-10.4.1/Geant4ConfigVersion.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\ilcsoft\v01-19-05\geant4\10.04.p01\lib\Geant4-10.4.1\"/>
+		</Unit>
+		<Unit filename="/home/vallois/thesis/CMTScan/CMTScan/../../../ilcsoft/v01-19-05/geant4/10.04.p01/lib/Geant4-10.4.1/Geant4LibraryDepends-relwithdebinfo.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\ilcsoft\v01-19-05\geant4\10.04.p01\lib\Geant4-10.4.1\"/>
+		</Unit>
+		<Unit filename="/home/vallois/thesis/CMTScan/CMTScan/../../../ilcsoft/v01-19-05/geant4/10.04.p01/lib/Geant4-10.4.1/Geant4LibraryDepends.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\ilcsoft\v01-19-05\geant4\10.04.p01\lib\Geant4-10.4.1\"/>
+		</Unit>
+		<Unit filename="/home/vallois/thesis/CMTScan/CMTScan/../../../ilcsoft/v01-19-05/geant4/10.04.p01/lib/Geant4-10.4.1/UseGeant4.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\ilcsoft\v01-19-05\geant4\10.04.p01\lib\Geant4-10.4.1\"/>
+		</Unit>
+		<Unit filename="/home/vallois/thesis/CMTScan/CMTScan/../../../ilcsoft/v01-19-05/geant4/10.04.p01/lib/Geant4-10.4.1/Modules/IntelCompileFeatures.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\ilcsoft\v01-19-05\geant4\10.04.p01\lib\Geant4-10.4.1\Modules\"/>
+		</Unit>
+		<Unit filename="/home/vallois/thesis/CMTScan/CMTScan/../../../ilcsoft/CLHEP/2.4.0.0/lib/CLHEP-2.4.0.0/CLHEPConfig.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\ilcsoft\CLHEP\2.4.0.0\lib\CLHEP-2.4.0.0\"/>
+		</Unit>
+		<Unit filename="/home/vallois/thesis/CMTScan/CMTScan/../../../ilcsoft/CLHEP/2.4.0.0/lib/CLHEP-2.4.0.0/CLHEPConfigVersion.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\ilcsoft\CLHEP\2.4.0.0\lib\CLHEP-2.4.0.0\"/>
+		</Unit>
+		<Unit filename="/home/vallois/thesis/CMTScan/CMTScan/../../../ilcsoft/CLHEP/2.4.0.0/lib/CLHEP-2.4.0.0/CLHEPLibraryDepends-relwithdebinfo.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\ilcsoft\CLHEP\2.4.0.0\lib\CLHEP-2.4.0.0\"/>
+		</Unit>
+		<Unit filename="/home/vallois/thesis/CMTScan/CMTScan/../../../ilcsoft/CLHEP/2.4.0.0/lib/CLHEP-2.4.0.0/CLHEPLibraryDepends.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\ilcsoft\CLHEP\2.4.0.0\lib\CLHEP-2.4.0.0\"/>
+		</Unit>
+	</Project>
+</CodeBlocks_project_file>
