@@ -6423,8 +6423,6 @@ G4RunManager.hh
 /home/vallois/thesis/CMTScan/CMTScan/src/G4RunManager.hh
 G4UnitsTable.hh
 /home/vallois/thesis/CMTScan/CMTScan/src/G4UnitsTable.hh
-G4SystemOfUnits.hh
-/home/vallois/thesis/CMTScan/CMTScan/src/G4SystemOfUnits.hh
 
 /home/vallois/thesis/CMTScan/CMTScan/src/CMTScanStackingAction.cc
 CMTScanStackingAction.hh

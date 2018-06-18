@@ -12,9 +12,6 @@
 #include "filereadstream.h"
 #include "document.h"
 
-//TODO changer la densité du nid d'abeille (verifier 0.764 g.cm-3)
-//TODO verifier les dimensions des couches dans le constants.hh et detectorConstruction
-
 std::map<int, G4ThreeVector> CMTScanDetectorConstruction::_geometryMap={};
 GeometryVariable *GeometryVariable::_singleton = nullptr;
 
@@ -80,6 +77,10 @@ void CMTScanDetectorConstruction::DefineMaterials() {
 	G4Material *SF6 = new G4Material("SF6", SF6_Density, 2);
 	SF6->AddElement(elS, 1);
 	SF6->AddElement(elF, 6);
+
+	///Nid d'abeille
+	G4Material *alveolar_core = new G4Material("alveolar_core", 0.764*g/cm3, 1);
+	alveolar_core->AddElement(elAl, 1);
 
 	///Isobutane
 	G4double Isobutane_Density = 2.51e-3 * g / cm3;
@@ -148,7 +149,6 @@ G4VPhysicalVolume* CMTScanDetectorConstruction::DefineVolumes() {
 	G4Material *RPC_Mylar_Material = nistManager->FindOrBuildMaterial("G4_MYLAR");
 	G4Material *RPC_Coating_Material = nistManager->FindOrBuildMaterial("G4_GRAPHITE");
 	G4Material *RPC_Glass_Material = nistManager->FindOrBuildMaterial("G4_Pyrex_Glass");
-	G4Material *RPC_K7_Material = nistManager->FindOrBuildMaterial("G4_Al");
 	G4Material *air = nistManager->FindOrBuildMaterial("G4_AIR");
 	G4Material *Target_Material = nistManager->FindOrBuildMaterial("G4_Pb");
 
@@ -199,7 +199,7 @@ G4VPhysicalVolume* CMTScanDetectorConstruction::DefineVolumes() {
 	G4Box* RPC_MylarCathode_Sol = 	new G4Box("RPC_MylarCathode_Sol", Detector_Size_X*0.5, Detector_Size_Y*0.5, RPC_MylarCathode_Th*0.5);
 	G4Box* RPC_K7B_Sol = 			new G4Box("RPC_K7B_Sol", Detector_Size_X*0.5, Detector_Size_Y*0.5, RPC_K7B_Th*0.5);
 
-	G4LogicalVolume* RPC_K7T_Log = 				new G4LogicalVolume(RPC_K7T_Sol, RPC_K7_Material, "RPC_K7T_Log");
+	G4LogicalVolume* RPC_K7T_Log = 				new G4LogicalVolume(RPC_K7T_Sol, nistManager->FindOrBuildMaterial("alveolar_core"), "RPC_K7T_Log");
 	G4LogicalVolume* RPC_Chip_Log = 			new G4LogicalVolume(RPC_Chip_Sol, nistManager->FindOrBuildMaterial("g10"), "RPC_Chip_Log");
 	G4LogicalVolume* RPC_PCB_Log = 				new G4LogicalVolume(RPC_PCB_Sol, nistManager->FindOrBuildMaterial("g10"), "RPC_PCB_Log");
 	G4LogicalVolume* RPC_MylarAnode_Log = 		new G4LogicalVolume(RPC_MylarAnode_Sol, RPC_Mylar_Material, "RPC_MylarAnode_Log");
@@ -209,7 +209,7 @@ G4VPhysicalVolume* CMTScanDetectorConstruction::DefineVolumes() {
 	G4LogicalVolume* RPC_GlassCathode_Log = 	new G4LogicalVolume(RPC_GlassCathode_Sol, RPC_Glass_Material, "RPC_GlassCathode_Log");
 	G4LogicalVolume* RPC_CoatingCathode_Log = 	new G4LogicalVolume(RPC_CoatingCathode_Sol, RPC_Coating_Material, "RPC_CoatingCathode_Log");
 	G4LogicalVolume* RPC_MylarCathode_Log = 	new G4LogicalVolume(RPC_MylarCathode_Sol, RPC_Mylar_Material, "RPC_MylarCathode_Log");
-	G4LogicalVolume* RPC_K7B_Log = 				new G4LogicalVolume(RPC_K7B_Sol, RPC_K7_Material, "RPC_K7B_Log");
+	G4LogicalVolume* RPC_K7B_Log = 				new G4LogicalVolume(RPC_K7B_Sol,  nistManager->FindOrBuildMaterial("alveolar_core"), "RPC_K7B_Log");
 
 	G4double Position_Z = RPC_Th*0.5;
 	Position_Z = Position_Z - RPC_K7T_Th*0.5;
