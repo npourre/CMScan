@@ -37,7 +37,7 @@ set(CMAKE_TARGET_DEFINITIONS_CXX
 set(CMAKE_CXX_TARGET_INCLUDE_PATH
   "/home/vallois/ilcsoft/CLHEP/2.4.0.0/lib/CLHEP-2.4.0.0/../../include"
   "../../cry_v1.7/src"
-  "/home/vallois/rapidjson/include/rapidjson"
+  ".././lib/rapidjson/include/rapidjson"
   "/home/vallois/ilcsoft/v01-19-05/geant4/10.04.p01/include/Geant4"
   "/home/vallois/ilcsoft/xercesc/3.2.1/include"
   "/home/vallois/ilcsoft/QT/4.8.6/include"
