@@ -12,6 +12,8 @@
 #include "filereadstream.h"
 #include "document.h"
 
+//TODO Prendre en compte les translation pour la geometrie et pour la generation de muon.
+
 std::map<int, G4ThreeVector> CMTScanDetectorConstruction::_geometryMap={};
 GeometryVariable *GeometryVariable::_singleton = nullptr;
 
