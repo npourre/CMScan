@@ -46,12 +46,15 @@ void CMTScanEventAction::EndOfEventAction(const G4Event *event)
 		G4ThreeVector Pos = Hit->GetPos();
 		G4ThreeVector Mom = Hit->GetMom();
 
-		analysisManager->FillNtupleIColumn(0, Hit->GetChamberNb());
-	    	analysisManager->FillNtupleDColumn(1, Pos.x()/m);
-	    	analysisManager->FillNtupleDColumn(2, Pos.y()/m);
-	    	analysisManager->FillNtupleDColumn(3, Hit->GetTime()/s);
-	    	analysisManager->AddNtupleRow();	
+        analysisManager->FillNtupleIColumn(0, event->GetEventID());
+		analysisManager->FillNtupleIColumn(1, Hit->GetChamberNb());
+		analysisManager->FillNtupleDColumn(2, Pos.x()/mm);
+	    analysisManager->FillNtupleDColumn(3, Pos.y()/mm);
+        analysisManager->FillNtupleDColumn(4, Pos.z()/mm);
+	    analysisManager->FillNtupleDColumn(5, Hit->GetTime()/s);
+	    analysisManager->AddNtupleRow();
 	}
+	G4cout<<event->GetEventID()<<G4endl;
 }
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
