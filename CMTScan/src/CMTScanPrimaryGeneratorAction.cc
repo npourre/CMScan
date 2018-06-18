@@ -185,17 +185,3 @@ void CMTScanPrimaryGeneratorAction::GeneratePrimaries(G4Event *anEvent)
 
 	TimeSimulated = gen->timeSimulated();
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
- 
