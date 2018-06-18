@@ -54,7 +54,6 @@ void CMTScanEventAction::EndOfEventAction(const G4Event *event)
 	    analysisManager->FillNtupleDColumn(5, Hit->GetTime()/s);
 	    analysisManager->AddNtupleRow();
 	}
-	G4cout<<event->GetEventID()<<G4endl;
 }
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......

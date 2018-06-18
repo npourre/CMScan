@@ -14,7 +14,7 @@ class G4LogicalVolume;
 class CMTScanDetectorConstruction : public G4VUserDetectorConstruction {
 public:
     CMTScanDetectorConstruction();
-    ~CMTScanDetectorConstruction() override = default;
+    ~CMTScanDetectorConstruction() override;
 
     G4VPhysicalVolume* Construct() override;
     void processGeometry();

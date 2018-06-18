@@ -178,8 +178,8 @@ G4VPhysicalVolume* CMTScanDetectorConstruction::DefineVolumes() {
 	/// Logical volume : RPC
 	/////////////////////////////////////////////////////
 
-    G4double Detector_Size_X = _geometryVariable->getDetectorSize().getX();
-    G4double Detector_Size_Y = _geometryVariable->getDetectorSize().getY();
+    G4double Detector_Size_X = 1*m;
+    G4double Detector_Size_Y = 1*m;
 	G4Box* RPC_Sol = new G4Box("RPC_Sol", Detector_Size_X*0.5, Detector_Size_Y*0.5, RPC_Th*0.5);
 	G4LogicalVolume* RPC_Log = new G4LogicalVolume(RPC_Sol, air, "RPC_Log");
 
@@ -287,15 +287,7 @@ G4VPhysicalVolume* CMTScanDetectorConstruction::DefineVolumes() {
 */
 	/////////////////////////////////////////////////////
 	/// Target
-	/////////////////////////////////////////////////////getInstance
-/*
-	G4Trd* Target = new G4Trd("Target",
-                              30*cm,
-                              10*cm,
-                              40*cm,
-                              15*cm,
-                              60*cm);
-*/
+	/////////////////////////////////////////////////////
 
     G4Box* Target = new G4Box("Target",
                               5*cm,
@@ -357,23 +349,27 @@ void CMTScanDetectorConstruction::processGeometry() {
 
     }
 
-    G4double min=1e9;
-    G4double max=-1e9;
+    G4double minZ=1e9;
+    G4double maxZ=-1e9;
 	std::cout<<"-------------------------------------------------"<<std::endl;
     for ( const auto& it : _geometryMap ){
-        if(it.second.getZ()>max)
-            max=it.second.getZ();
-        if(it.second.getZ()<min)
-            min=it.second.getZ();
+        if(it.second.getZ()>maxZ)
+            maxZ=it.second.getZ();
+        if(it.second.getZ()<minZ)
+            minZ=it.second.getZ();
         std::cout<<"Slot "<<it.first<<":\t"<<
 				 it.second.getX()/cm<<" cm\t"<<
 				 it.second.getY()/cm<<" cm\t"<<
 				 it.second.getZ()/cm<<" cm"<<std::endl;
     }
     std::cout<<"-------------------------------------------------"<<std::endl;
-    G4ThreeVector detector_size(1*m,1*m,max-min+RPC_Th);
+    G4ThreeVector detector_size(1*m,1*m,maxZ-minZ+RPC_Th);
     G4ThreeVector world_size(detector_size*1.2);
     _geometryVariable->setDetectorSize(detector_size);
     _geometryVariable->setWorldSize(world_size);
+}
+
+CMTScanDetectorConstruction::~CMTScanDetectorConstruction() {
+    GeometryVariable::kill();
 }
 
