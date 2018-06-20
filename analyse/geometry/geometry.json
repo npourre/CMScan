@@ -1,0 +1,52 @@
+{
+  "chambers": [
+    {
+      "slot": 0,
+      "position_x": 0,
+      "position_y": 0,
+      "position_z": 35
+    },
+    {
+      "slot": 1,
+      "position_x": 0,
+      "position_y": 0,
+      "position_z": 30
+    },
+    {
+      "slot": 2,
+      "position_x": 0,
+      "position_y": 0,
+      "position_z": 25
+    },
+    {
+      "slot": 3,
+      "position_x": 0,
+      "position_y": 0,
+      "position_z": 20
+    },
+    {
+      "slot": 4,
+      "position_x": 0,
+      "position_y": 0,
+      "position_z": -20
+    },
+    {
+      "slot": 5,
+      "position_x": 0,
+      "position_y": 0,
+      "position_z": -25
+    },
+    {
+      "slot": 6,
+      "position_x": 0,
+      "position_y": 0,
+      "position_z": -30
+    },
+    {
+      "slot": 7,
+      "position_x": 0,
+      "position_y": 0,
+      "position_z": -35
+    }
+  ]
+}

@@ -11,21 +11,9 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b155059d-1717-4616-ac70-b66cb77715ee" name="Default" comment="">
+    <list default="true" id="b155059d-1717-4616-ac70-b66cb77715ee" name="Default" comment="test">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMTScan.cbp" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMTScan.cbp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeCache.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/CMTScan.dir/DependInfo.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/CMTScan.dir/DependInfo.cmake" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/CMTScan.dir/build.make" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/CMTScan.dir/build.make" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/CMTScan.dir/cmake_clean.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/CMTScan.dir/cmake_clean.cmake" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/CMTScan.dir/flags.make" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/CMTScan.dir/flags.make" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/CMTScan.dir/link.txt" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/CMTScan.dir/link.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/CMTScan.dir/progress.make" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/CMTScan.dir/progress.make" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Makefile2" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Makefile2" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/progress.marks" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/progress.marks" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Makefile" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/Makefile" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/data.root" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/rapidjson" beforeDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/cmake-build-debug/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -38,10 +26,11 @@
   <component name="ExecutionTargetManager" SELECTED_TARGET="CMakeBuildProfile:Debug" />
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="CMTScan.cc" pinned="false" current-in-tab="false">
+      <file leaf-file-name="CMTScan.cc" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/CMTScan.cc">
           <provider selected="true" editor-type-id="text-editor">
-            <state>
+            <state relative-caret-position="309">
+              <caret line="125" column="30" lean-forward="true" selection-start-line="125" selection-start-column="30" selection-end-line="125" selection-end-column="30" />
               <folding>
                 <element signature="e#1803#1844#0" expanded="true" />
               </folding>
@@ -52,17 +41,17 @@
       <file leaf-file-name="CMTScanRunAction.hh" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/include/CMTScanRunAction.hh">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="240">
+            <state relative-caret-position="255">
               <caret line="17" selection-start-line="17" selection-end-line="17" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="CMTScanDetectorConstruction.cc" pinned="false" current-in-tab="true">
+      <file leaf-file-name="CMTScanDetectorConstruction.cc" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/CMTScanDetectorConstruction.cc">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="225">
-              <caret line="27" column="28" selection-start-line="27" selection-start-column="28" selection-end-line="27" selection-end-column="28" />
+            <state relative-caret-position="924">
+              <caret line="362" column="47" selection-start-line="362" selection-start-column="47" selection-end-line="362" selection-end-column="47" />
             </state>
           </provider>
         </entry>
@@ -88,7 +77,7 @@
       <file leaf-file-name="GeometryVariable.hh" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/include/GeometryVariable.hh">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="375">
+            <state relative-caret-position="390">
               <caret line="26" column="56" selection-start-line="26" selection-start-column="56" selection-end-line="26" selection-end-column="56" />
             </state>
           </provider>
@@ -158,10 +147,10 @@
         <option value="$PROJECT_DIR$/include/GeometryVariable.hh" />
         <option value="$PROJECT_DIR$/src/CMTScanEventAction.cc" />
         <option value="$PROJECT_DIR$/include/CMTScanDetectorConstruction.hh" />
-        <option value="$PROJECT_DIR$/src/CMTScanDetectorConstruction.cc" />
         <option value="$PROJECT_DIR$/geometry/geometry.json" />
         <option value="$PROJECT_DIR$/include/CMTScanRunAction.hh" />
         <option value="$PROJECT_DIR$/CMakeLists.txt" />
+        <option value="$PROJECT_DIR$/src/CMTScanDetectorConstruction.cc" />
       </list>
     </option>
   </component>
@@ -173,7 +162,7 @@
   </component>
   <component name="OCFindUsagesOptions" text="true" ivars="false" properties="true" derivedClasses="false" />
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="1275" />
+    <option name="x" value="3195" />
     <option name="y" value="26" />
     <option name="width" value="1930" />
     <option name="height" value="1035" />
@@ -184,7 +173,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -194,28 +182,23 @@
             </path>
             <path>
               <item name="CMTScan" type="b2602c69:ProjectViewProjectNode" />
-              <item name="CMTScan" type="462c0819:PsiDirectoryNode" />
-              <item name="cmake-build-debug" type="462c0819:PsiDirectoryNode" />
+              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
             </path>
             <path>
               <item name="CMTScan" type="b2602c69:ProjectViewProjectNode" />
-              <item name="CMTScan" type="462c0819:PsiDirectoryNode" />
-              <item name="geometry" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="CMTScan" type="b2602c69:ProjectViewProjectNode" />
-              <item name="CMTScan" type="462c0819:PsiDirectoryNode" />
-              <item name="include" type="462c0819:PsiDirectoryNode" />
+              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
+              <item name="Header Search Paths" type="70bed36:NamedLibraryElementNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$USER_HOME$/ilcsoft/geant4/10.04.p01/examples/basic/B2/B2a/CMakeLists.txt" />
+    <property name="last_opened_file_path" value="$USER_HOME$/rpcCode/Trivent/CMakeLists.txt" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="settings.editor.selected.configurable" value="project.propVCSSupport.Mappings" />
@@ -263,6 +246,7 @@
       <workItem from="1529046522698" duration="8614000" />
       <workItem from="1529302012023" duration="1031000" />
       <workItem from="1529303129143" duration="5275000" />
+      <workItem from="1529494888841" duration="1773000" />
     </task>
     <task id="LOCAL-00001" summary="test">
       <created>1529302629359</created>
@@ -313,11 +297,25 @@
       <option name="project" value="LOCAL" />
       <updated>1529308905266</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="restaure la version precedente">
+      <created>1529488419680</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1529488419680</updated>
+    </task>
+    <task id="LOCAL-00009" summary="test">
+      <created>1529488542498</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1529488542498</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="62207000" />
+    <option name="totallyTimeSpent" value="64549000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -329,36 +327,27 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="1275" y="26" width="1930" height="1035" extended-state="6" />
+    <frame x="3195" y="26" width="1930" height="1035" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.20949867" />
-      <window_info anchor="bottom" id="TODO" order="6" sideWeight="0.49868074" weight="0.32951945" />
-      <window_info anchor="bottom" id="CMake" order="7" sideWeight="0.49868074" visible="true" weight="0.32951945" />
-      <window_info active="true" anchor="bottom" id="Event Log" order="7" sideWeight="0.5013193" side_tool="true" visible="true" weight="0.32951945" />
-      <window_info anchor="bottom" id="Version Control" order="7" sideWeight="0.49762532" weight="0.32951945" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.4939314" weight="0.26843318" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.12084433" />
+      <window_info anchor="bottom" id="TODO" order="6" sideWeight="0.49920845" weight="0.32990867" />
+      <window_info anchor="bottom" id="CMake" order="7" weight="0.33105022" />
+      <window_info anchor="bottom" id="Event Log" order="7" sideWeight="0.5013193" side_tool="true" visible="true" weight="0.32951945" />
+      <window_info anchor="bottom" id="Version Control" order="7" sideWeight="0.49868074" weight="0.32951945" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.4939314" weight="0.2665904" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info anchor="bottom" id="Terminal" order="7" sideWeight="0.49920845" weight="0.32951945" />
+      <window_info anchor="bottom" id="Terminal" order="7" weight="0.32990867" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.39954337" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.18258575" />
-      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
-      <window_info anchor="bottom" id="TODO" order="6" sideWeight="0.49920845" weight="0.32990867" />
-      <window_info anchor="bottom" id="Version Control" order="7" sideWeight="0.49920845" weight="0.32951945" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.4939314" visible="true" weight="0.2665904" />
-      <window_info anchor="bottom" id="Terminal" order="7" weight="0.32990867" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.39954337" />
       <window_info anchor="bottom" id="Messages" order="7" sideWeight="0.4949868" weight="0.32837528" />
       <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Event Log" order="7" sideWeight="0.5060686" side_tool="true" visible="true" weight="0.2665904" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32990867" />
-      <window_info anchor="bottom" id="CMake" order="7" weight="0.33105022" />
-      <window_info id="Favorites" order="2" side_tool="true" />
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -397,12 +386,13 @@
     <ignored-roots>
       <path value="$PROJECT_DIR$/lib/rapidjson" />
     </ignored-roots>
-    <MESSAGE value="test" />
     <MESSAGE value="ajout rapidjson" />
     <MESSAGE value="add Idevent and zpos(.root)" />
     <MESSAGE value="modif k7" />
     <MESSAGE value="add kill() singleton" />
-    <option name="LAST_COMMIT_MESSAGE" value="add kill() singleton" />
+    <MESSAGE value="restaure la version precedente" />
+    <MESSAGE value="test" />
+    <option name="LAST_COMMIT_MESSAGE" value="test" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -459,13 +449,6 @@
     </expressions>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/CMTScanTrackerSD.cc">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1005">
-          <caret line="67" column="42" lean-forward="true" selection-start-line="67" selection-start-column="42" selection-end-line="67" selection-end-column="42" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/CMakeLists.txt">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="855">
@@ -727,9 +710,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="764">
           <caret line="176" column="78" selection-start-line="176" selection-start-column="78" selection-end-line="176" selection-end-column="78" />
-          <folding>
-            <element signature="e#0#43#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -752,7 +732,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/include/CMTScanRunAction.hh">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="240">
+        <state relative-caret-position="255">
           <caret line="17" selection-start-line="17" selection-end-line="17" />
         </state>
       </provider>
@@ -769,17 +749,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/include/GeometryVariable.hh">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="375">
+        <state relative-caret-position="390">
           <caret line="26" column="56" selection-start-line="26" selection-start-column="56" selection-end-line="26" selection-end-column="56" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/CMTScan.cc">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <folding>
-            <element signature="e#1803#1844#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -792,8 +763,21 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/CMTScanDetectorConstruction.cc">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="225">
-          <caret line="27" column="28" selection-start-line="27" selection-start-column="28" selection-end-line="27" selection-end-column="28" />
+        <state relative-caret-position="924">
+          <caret line="362" column="47" selection-start-line="362" selection-start-column="47" selection-end-line="362" selection-end-column="47" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$APPLICATION_CONFIG_DIR$/scratches/scratch.cpp">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CMTScan.cc">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="309">
+          <caret line="125" column="30" lean-forward="true" selection-start-line="125" selection-start-column="30" selection-end-line="125" selection-end-column="30" />
+          <folding>
+            <element signature="e#1803#1844#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
