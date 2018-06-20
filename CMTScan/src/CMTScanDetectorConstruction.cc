@@ -374,4 +374,3 @@ void CMTScanDetectorConstruction::processGeometry() {
 CMTScanDetectorConstruction::~CMTScanDetectorConstruction() {
     GeometryVariable::kill();
 }
-
