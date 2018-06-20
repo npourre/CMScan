@@ -4,7 +4,6 @@ file(REMOVE_RECURSE
   "CMakeFiles/CMTScan.dir/src/CMTScanDetectorConstruction.cc.o"
   "CMakeFiles/CMTScan.dir/src/CMTScanEventAction.cc.o"
   "CMakeFiles/CMTScan.dir/src/CMTScanPrimaryGeneratorAction.cc.o"
-  "CMakeFiles/CMTScan.dir/src/CMTScanPrimaryGeneratorMessenger.cc.o"
   "CMakeFiles/CMTScan.dir/src/CMTScanRunAction.cc.o"
   "CMakeFiles/CMTScan.dir/src/CMTScanStackingAction.cc.o"
   "CMakeFiles/CMTScan.dir/src/CMTScanTrackerHit.cc.o"

@@ -304,33 +304,6 @@ src/CMTScanPrimaryGeneratorAction.cc.s:
 	$(MAKE) -f CMakeFiles/CMTScan.dir/build.make CMakeFiles/CMTScan.dir/src/CMTScanPrimaryGeneratorAction.cc.s
 .PHONY : src/CMTScanPrimaryGeneratorAction.cc.s
 
-src/CMTScanPrimaryGeneratorMessenger.o: src/CMTScanPrimaryGeneratorMessenger.cc.o
-
-.PHONY : src/CMTScanPrimaryGeneratorMessenger.o
-
-# target to build an object file
-src/CMTScanPrimaryGeneratorMessenger.cc.o:
-	$(MAKE) -f CMakeFiles/CMTScan.dir/build.make CMakeFiles/CMTScan.dir/src/CMTScanPrimaryGeneratorMessenger.cc.o
-.PHONY : src/CMTScanPrimaryGeneratorMessenger.cc.o
-
-src/CMTScanPrimaryGeneratorMessenger.i: src/CMTScanPrimaryGeneratorMessenger.cc.i
-
-.PHONY : src/CMTScanPrimaryGeneratorMessenger.i
-
-# target to preprocess a source file
-src/CMTScanPrimaryGeneratorMessenger.cc.i:
-	$(MAKE) -f CMakeFiles/CMTScan.dir/build.make CMakeFiles/CMTScan.dir/src/CMTScanPrimaryGeneratorMessenger.cc.i
-.PHONY : src/CMTScanPrimaryGeneratorMessenger.cc.i
-
-src/CMTScanPrimaryGeneratorMessenger.s: src/CMTScanPrimaryGeneratorMessenger.cc.s
-
-.PHONY : src/CMTScanPrimaryGeneratorMessenger.s
-
-# target to generate assembly for a file
-src/CMTScanPrimaryGeneratorMessenger.cc.s:
-	$(MAKE) -f CMakeFiles/CMTScan.dir/build.make CMakeFiles/CMTScan.dir/src/CMTScanPrimaryGeneratorMessenger.cc.s
-.PHONY : src/CMTScanPrimaryGeneratorMessenger.cc.s
-
 src/CMTScanRunAction.o: src/CMTScanRunAction.cc.o
 
 .PHONY : src/CMTScanRunAction.o
@@ -494,9 +467,6 @@ help:
 	@echo "... src/CMTScanPrimaryGeneratorAction.o"
 	@echo "... src/CMTScanPrimaryGeneratorAction.i"
 	@echo "... src/CMTScanPrimaryGeneratorAction.s"
-	@echo "... src/CMTScanPrimaryGeneratorMessenger.o"
-	@echo "... src/CMTScanPrimaryGeneratorMessenger.i"
-	@echo "... src/CMTScanPrimaryGeneratorMessenger.s"
 	@echo "... src/CMTScanRunAction.o"
 	@echo "... src/CMTScanRunAction.i"
 	@echo "... src/CMTScanRunAction.s"

@@ -23,7 +23,7 @@ SET(CRY_INCLUDE_DIRS ${CRY_DIR}/src)
 SET(CRY_LIBRARIES ${CRY_DIR}/lib/libCRY.a)
 
 INCLUDE_DIRECTORIES( ${CRY_INCLUDE_DIRS} )
-include_directories(./lib/rapidjson/include/rapidjson)
+include_directories(/home/vallois/rapidjson/include/rapidjson)
 #----------------------------------------------------------------------------
 # Setup Geant4 include directories and compile definitions
 # Setup include directory for this project

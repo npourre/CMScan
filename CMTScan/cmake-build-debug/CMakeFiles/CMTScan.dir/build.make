@@ -177,33 +177,9 @@ CMakeFiles/CMTScan.dir/src/CMTScanPrimaryGeneratorAction.cc.o.provides: CMakeFil
 CMakeFiles/CMTScan.dir/src/CMTScanPrimaryGeneratorAction.cc.o.provides.build: CMakeFiles/CMTScan.dir/src/CMTScanPrimaryGeneratorAction.cc.o
 
 
-CMakeFiles/CMTScan.dir/src/CMTScanPrimaryGeneratorMessenger.cc.o: CMakeFiles/CMTScan.dir/flags.make
-CMakeFiles/CMTScan.dir/src/CMTScanPrimaryGeneratorMessenger.cc.o: ../src/CMTScanPrimaryGeneratorMessenger.cc
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/vallois/thesis/CMTScan/CMTScan/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/CMTScan.dir/src/CMTScanPrimaryGeneratorMessenger.cc.o"
-	/home/vallois/ilcsoft/v01-19-05/mysql/usr/bin/g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/CMTScan.dir/src/CMTScanPrimaryGeneratorMessenger.cc.o -c /home/vallois/thesis/CMTScan/CMTScan/src/CMTScanPrimaryGeneratorMessenger.cc
-
-CMakeFiles/CMTScan.dir/src/CMTScanPrimaryGeneratorMessenger.cc.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/CMTScan.dir/src/CMTScanPrimaryGeneratorMessenger.cc.i"
-	/home/vallois/ilcsoft/v01-19-05/mysql/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/vallois/thesis/CMTScan/CMTScan/src/CMTScanPrimaryGeneratorMessenger.cc > CMakeFiles/CMTScan.dir/src/CMTScanPrimaryGeneratorMessenger.cc.i
-
-CMakeFiles/CMTScan.dir/src/CMTScanPrimaryGeneratorMessenger.cc.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/CMTScan.dir/src/CMTScanPrimaryGeneratorMessenger.cc.s"
-	/home/vallois/ilcsoft/v01-19-05/mysql/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/vallois/thesis/CMTScan/CMTScan/src/CMTScanPrimaryGeneratorMessenger.cc -o CMakeFiles/CMTScan.dir/src/CMTScanPrimaryGeneratorMessenger.cc.s
-
-CMakeFiles/CMTScan.dir/src/CMTScanPrimaryGeneratorMessenger.cc.o.requires:
-
-.PHONY : CMakeFiles/CMTScan.dir/src/CMTScanPrimaryGeneratorMessenger.cc.o.requires
-
-CMakeFiles/CMTScan.dir/src/CMTScanPrimaryGeneratorMessenger.cc.o.provides: CMakeFiles/CMTScan.dir/src/CMTScanPrimaryGeneratorMessenger.cc.o.requires
-	$(MAKE) -f CMakeFiles/CMTScan.dir/build.make CMakeFiles/CMTScan.dir/src/CMTScanPrimaryGeneratorMessenger.cc.o.provides.build
-.PHONY : CMakeFiles/CMTScan.dir/src/CMTScanPrimaryGeneratorMessenger.cc.o.provides
-
-CMakeFiles/CMTScan.dir/src/CMTScanPrimaryGeneratorMessenger.cc.o.provides.build: CMakeFiles/CMTScan.dir/src/CMTScanPrimaryGeneratorMessenger.cc.o
-
-
 CMakeFiles/CMTScan.dir/src/CMTScanRunAction.cc.o: CMakeFiles/CMTScan.dir/flags.make
 CMakeFiles/CMTScan.dir/src/CMTScanRunAction.cc.o: ../src/CMTScanRunAction.cc
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/vallois/thesis/CMTScan/CMTScan/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/CMTScan.dir/src/CMTScanRunAction.cc.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/vallois/thesis/CMTScan/CMTScan/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/CMTScan.dir/src/CMTScanRunAction.cc.o"
 	/home/vallois/ilcsoft/v01-19-05/mysql/usr/bin/g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/CMTScan.dir/src/CMTScanRunAction.cc.o -c /home/vallois/thesis/CMTScan/CMTScan/src/CMTScanRunAction.cc
 
 CMakeFiles/CMTScan.dir/src/CMTScanRunAction.cc.i: cmake_force
@@ -227,7 +203,7 @@ CMakeFiles/CMTScan.dir/src/CMTScanRunAction.cc.o.provides.build: CMakeFiles/CMTS
 
 CMakeFiles/CMTScan.dir/src/CMTScanStackingAction.cc.o: CMakeFiles/CMTScan.dir/flags.make
 CMakeFiles/CMTScan.dir/src/CMTScanStackingAction.cc.o: ../src/CMTScanStackingAction.cc
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/vallois/thesis/CMTScan/CMTScan/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/CMTScan.dir/src/CMTScanStackingAction.cc.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/vallois/thesis/CMTScan/CMTScan/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/CMTScan.dir/src/CMTScanStackingAction.cc.o"
 	/home/vallois/ilcsoft/v01-19-05/mysql/usr/bin/g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/CMTScan.dir/src/CMTScanStackingAction.cc.o -c /home/vallois/thesis/CMTScan/CMTScan/src/CMTScanStackingAction.cc
 
 CMakeFiles/CMTScan.dir/src/CMTScanStackingAction.cc.i: cmake_force
@@ -251,7 +227,7 @@ CMakeFiles/CMTScan.dir/src/CMTScanStackingAction.cc.o.provides.build: CMakeFiles
 
 CMakeFiles/CMTScan.dir/src/CMTScanTrackerHit.cc.o: CMakeFiles/CMTScan.dir/flags.make
 CMakeFiles/CMTScan.dir/src/CMTScanTrackerHit.cc.o: ../src/CMTScanTrackerHit.cc
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/vallois/thesis/CMTScan/CMTScan/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building CXX object CMakeFiles/CMTScan.dir/src/CMTScanTrackerHit.cc.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/vallois/thesis/CMTScan/CMTScan/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/CMTScan.dir/src/CMTScanTrackerHit.cc.o"
 	/home/vallois/ilcsoft/v01-19-05/mysql/usr/bin/g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/CMTScan.dir/src/CMTScanTrackerHit.cc.o -c /home/vallois/thesis/CMTScan/CMTScan/src/CMTScanTrackerHit.cc
 
 CMakeFiles/CMTScan.dir/src/CMTScanTrackerHit.cc.i: cmake_force
@@ -275,7 +251,7 @@ CMakeFiles/CMTScan.dir/src/CMTScanTrackerHit.cc.o.provides.build: CMakeFiles/CMT
 
 CMakeFiles/CMTScan.dir/src/CMTScanTrackerSD.cc.o: CMakeFiles/CMTScan.dir/flags.make
 CMakeFiles/CMTScan.dir/src/CMTScanTrackerSD.cc.o: ../src/CMTScanTrackerSD.cc
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/vallois/thesis/CMTScan/CMTScan/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Building CXX object CMakeFiles/CMTScan.dir/src/CMTScanTrackerSD.cc.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/vallois/thesis/CMTScan/CMTScan/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building CXX object CMakeFiles/CMTScan.dir/src/CMTScanTrackerSD.cc.o"
 	/home/vallois/ilcsoft/v01-19-05/mysql/usr/bin/g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/CMTScan.dir/src/CMTScanTrackerSD.cc.o -c /home/vallois/thesis/CMTScan/CMTScan/src/CMTScanTrackerSD.cc
 
 CMakeFiles/CMTScan.dir/src/CMTScanTrackerSD.cc.i: cmake_force
@@ -299,7 +275,7 @@ CMakeFiles/CMTScan.dir/src/CMTScanTrackerSD.cc.o.provides.build: CMakeFiles/CMTS
 
 CMakeFiles/CMTScan.dir/src/RNGWrapper.cc.o: CMakeFiles/CMTScan.dir/flags.make
 CMakeFiles/CMTScan.dir/src/RNGWrapper.cc.o: ../src/RNGWrapper.cc
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/vallois/thesis/CMTScan/CMTScan/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Building CXX object CMakeFiles/CMTScan.dir/src/RNGWrapper.cc.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/vallois/thesis/CMTScan/CMTScan/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Building CXX object CMakeFiles/CMTScan.dir/src/RNGWrapper.cc.o"
 	/home/vallois/ilcsoft/v01-19-05/mysql/usr/bin/g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/CMTScan.dir/src/RNGWrapper.cc.o -c /home/vallois/thesis/CMTScan/CMTScan/src/RNGWrapper.cc
 
 CMakeFiles/CMTScan.dir/src/RNGWrapper.cc.i: cmake_force
@@ -328,7 +304,6 @@ CMTScan_OBJECTS = \
 "CMakeFiles/CMTScan.dir/src/CMTScanDetectorConstruction.cc.o" \
 "CMakeFiles/CMTScan.dir/src/CMTScanEventAction.cc.o" \
 "CMakeFiles/CMTScan.dir/src/CMTScanPrimaryGeneratorAction.cc.o" \
-"CMakeFiles/CMTScan.dir/src/CMTScanPrimaryGeneratorMessenger.cc.o" \
 "CMakeFiles/CMTScan.dir/src/CMTScanRunAction.cc.o" \
 "CMakeFiles/CMTScan.dir/src/CMTScanStackingAction.cc.o" \
 "CMakeFiles/CMTScan.dir/src/CMTScanTrackerHit.cc.o" \
@@ -343,7 +318,6 @@ CMTScan: CMakeFiles/CMTScan.dir/src/CMTScanActionInitialization.cc.o
 CMTScan: CMakeFiles/CMTScan.dir/src/CMTScanDetectorConstruction.cc.o
 CMTScan: CMakeFiles/CMTScan.dir/src/CMTScanEventAction.cc.o
 CMTScan: CMakeFiles/CMTScan.dir/src/CMTScanPrimaryGeneratorAction.cc.o
-CMTScan: CMakeFiles/CMTScan.dir/src/CMTScanPrimaryGeneratorMessenger.cc.o
 CMTScan: CMakeFiles/CMTScan.dir/src/CMTScanRunAction.cc.o
 CMTScan: CMakeFiles/CMTScan.dir/src/CMTScanStackingAction.cc.o
 CMTScan: CMakeFiles/CMTScan.dir/src/CMTScanTrackerHit.cc.o
@@ -395,7 +369,7 @@ CMTScan: /home/vallois/ilcsoft/v01-19-05/geant4/10.04.p01/lib/libG4intercoms.so
 CMTScan: /home/vallois/ilcsoft/v01-19-05/geant4/10.04.p01/lib/libG4global.so
 CMTScan: /home/vallois/ilcsoft/CLHEP/2.4.0.0/lib/libCLHEP-2.4.0.0.so
 CMTScan: CMakeFiles/CMTScan.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/vallois/thesis/CMTScan/CMTScan/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_12) "Linking CXX executable CMTScan"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/vallois/thesis/CMTScan/CMTScan/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Linking CXX executable CMTScan"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/CMTScan.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
@@ -408,7 +382,6 @@ CMakeFiles/CMTScan.dir/requires: CMakeFiles/CMTScan.dir/src/CMTScanActionInitial
 CMakeFiles/CMTScan.dir/requires: CMakeFiles/CMTScan.dir/src/CMTScanDetectorConstruction.cc.o.requires
 CMakeFiles/CMTScan.dir/requires: CMakeFiles/CMTScan.dir/src/CMTScanEventAction.cc.o.requires
 CMakeFiles/CMTScan.dir/requires: CMakeFiles/CMTScan.dir/src/CMTScanPrimaryGeneratorAction.cc.o.requires
-CMakeFiles/CMTScan.dir/requires: CMakeFiles/CMTScan.dir/src/CMTScanPrimaryGeneratorMessenger.cc.o.requires
 CMakeFiles/CMTScan.dir/requires: CMakeFiles/CMTScan.dir/src/CMTScanRunAction.cc.o.requires
 CMakeFiles/CMTScan.dir/requires: CMakeFiles/CMTScan.dir/src/CMTScanStackingAction.cc.o.requires
 CMakeFiles/CMTScan.dir/requires: CMakeFiles/CMTScan.dir/src/CMTScanTrackerHit.cc.o.requires

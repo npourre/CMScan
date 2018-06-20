@@ -97,7 +97,7 @@
 					<Add option="-DG4VIS_USE_OPENGL"/>
 					<Add directory="/home/vallois/ilcsoft/CLHEP/2.4.0.0/lib/CLHEP-2.4.0.0/../../include"/>
 					<Add directory="/home/vallois/thesis/CMTScan/CMTScan/../cry_v1.7/src"/>
-					<Add directory="/home/vallois/thesis/CMTScan/CMTScan/./lib/rapidjson/include/rapidjson"/>
+					<Add directory="/home/vallois/rapidjson/include/rapidjson"/>
 					<Add directory="/home/vallois/ilcsoft/v01-19-05/geant4/10.04.p01/include/Geant4"/>
 					<Add directory="/home/vallois/ilcsoft/xercesc/3.2.1/include"/>
 					<Add directory="/home/vallois/ilcsoft/QT/4.8.6/include"/>
@@ -142,7 +142,7 @@
 					<Add option="-DG4VIS_USE_OPENGL"/>
 					<Add directory="/home/vallois/ilcsoft/CLHEP/2.4.0.0/lib/CLHEP-2.4.0.0/../../include"/>
 					<Add directory="/home/vallois/thesis/CMTScan/CMTScan/../cry_v1.7/src"/>
-					<Add directory="/home/vallois/thesis/CMTScan/CMTScan/./lib/rapidjson/include/rapidjson"/>
+					<Add directory="/home/vallois/rapidjson/include/rapidjson"/>
 					<Add directory="/home/vallois/ilcsoft/v01-19-05/geant4/10.04.p01/include/Geant4"/>
 					<Add directory="/home/vallois/ilcsoft/xercesc/3.2.1/include"/>
 					<Add directory="/home/vallois/ilcsoft/QT/4.8.6/include"/>
@@ -183,9 +183,6 @@
 		<Unit filename="/home/vallois/thesis/CMTScan/CMTScan/include/CMTScanPrimaryGeneratorAction.hh">
 			<Option target="CMTScan"/>
 		</Unit>
-		<Unit filename="/home/vallois/thesis/CMTScan/CMTScan/include/CMTScanPrimaryGeneratorMessenger.hh">
-			<Option target="CMTScan"/>
-		</Unit>
 		<Unit filename="/home/vallois/thesis/CMTScan/CMTScan/include/CMTScanRunAction.hh">
 			<Option target="CMTScan"/>
 		</Unit>
@@ -214,9 +211,6 @@
 			<Option target="CMTScan"/>
 		</Unit>
 		<Unit filename="/home/vallois/thesis/CMTScan/CMTScan/src/CMTScanPrimaryGeneratorAction.cc">
-			<Option target="CMTScan"/>
-		</Unit>
-		<Unit filename="/home/vallois/thesis/CMTScan/CMTScan/src/CMTScanPrimaryGeneratorMessenger.cc">
 			<Option target="CMTScan"/>
 		</Unit>
 		<Unit filename="/home/vallois/thesis/CMTScan/CMTScan/src/CMTScanRunAction.cc">
