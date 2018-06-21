@@ -14,6 +14,26 @@
 #include "filereadstream.h"
 #include "document.h"
 
+std::pair<int, int> addPair(std::pair<int, int> p1, std::pair<int, int> p2){
+    std::pair<int, int> p({p1.first+p2.first, p1.second+p2.second});
+    return p;
+}
+
+void generateMulti(std::vector<std::pair<int, int>>& vectPair, int multi){
+
+    std::vector<std::pair<int, int>> randomchoice({{-1,-1}, {0, -1}, {0,  1}, {-1, 0}, { 1, 0}, {-1, 1}, {0, 1}, {1, 1}});
+    for (int i = 0; i < multi-1; ++i) {
+        std::shuffle( randomchoice.begin(), randomchoice.end(), std::mt19937(std::random_device()()));
+
+        std::pair<int, int> newPair = addPair(vectPair[0], randomchoice[randomchoice.size()-1]);
+        randomchoice.pop_back();
+
+        if(newPair.first < 0 || newPair.first > 1000 || newPair.second < 0 || newPair.second > 1000)
+            continue;
+        vectPair.push_back(newPair);
+    }
+}
+
 void lightApad(std::vector<int> & x_coord_hit_pads, std::vector<int> & y_coord_hit_pads, int nb_mult,int nb_pad)
 {
     std::mt19937 ran(static_cast<unsigned long>(time(nullptr)));
@@ -300,9 +320,9 @@ void lightApad(std::vector<int> & x_coord_hit_pads, std::vector<int> & y_coord_h
     }
 }
 
-std::map<int, double> analyse::_geometryMap={};
+std::map<int, double> Analyse::_geometryMap={};
 //TODO changer fopen
-void analyse::processGeometry() {
+void Analyse::processGeometry() {
     _geometryMap.clear();
     FILE* fp = fopen("../geometry/geometry.json", "r");
     char readBuffer[65536];
@@ -324,6 +344,8 @@ void analyse::processGeometry() {
             std::cout <<"ERROR : json file has no slot member"<<std::endl;
     }
 }
+
+
 mid_point findpoint (double** dataAB)
 {
     double SMALL_NUM=0.00000001; //Pour éviter de diviser par zéro

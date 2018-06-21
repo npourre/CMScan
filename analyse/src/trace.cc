@@ -18,17 +18,16 @@
 
 #include "TH2D.h"
 
-Trace::Trace(const std::vector<Cluster> &traceHitList) :
+Trace::Trace(std::vector<Cluster*> &traceHitList) :
         _clusterVec{},
         _pointLine{},
         _vectDirLine{} {
     for (auto &it : traceHitList){
-        _clusterVec.emplace_back(it.getVectCalo(),it.getSizeClusterX(),it.getSizeClusterY());
+        _clusterVec.push_back(it);
     }
 }
 
-//TODO Remettre une verification a la fin en cas de trace avec moins de 3 cluster
-Trace Trace::tracering(std::map<int, std::vector<Cluster> > &mapOfClusters) {
+void Trace::tracering(std::map<int, std::vector<Cluster*> > &mapOfClusters, std::vector<Trace*> &traceVec) {
     std::vector<double> x;
     std::vector<double> y;
     std::vector<double> z;
@@ -36,16 +35,16 @@ Trace Trace::tracering(std::map<int, std::vector<Cluster> > &mapOfClusters) {
 
         for (auto& clusterVec : clusterMap.second){
 
-            x.push_back(clusterVec.getPosition()[0]);
-            y.push_back(clusterVec.getPosition()[1]);
-            z.push_back(clusterVec.getPosition()[2]);
+            x.push_back(clusterVec->getPosition()[0]);
+            y.push_back(clusterVec->getPosition()[1]);
+            z.push_back(clusterVec->getPosition()[2]);
         }
     }
 
     std::pair<double,double> linePlanXZ = processHough(z,x);
     std::pair<double,double> linePlanYZ = processHough(z,y);
 
-    std::vector<Cluster> traceHitList;
+    std::vector<Cluster*> traceHitList;
 
     for (auto& clusterMap : mapOfClusters) {
 
@@ -53,55 +52,16 @@ Trace Trace::tracering(std::map<int, std::vector<Cluster> > &mapOfClusters) {
 
             if(distance(linePlanXZ,
                         linePlanYZ,
-                        clusterVec.getPosition()[0],
-                        clusterVec.getPosition()[1],
-                        clusterVec.getPosition()[2]) < 50) {
+                        clusterVec->getPosition()[0],
+                        clusterVec->getPosition()[1],
+                        clusterVec->getPosition()[2]) < 100) {
                 traceHitList.push_back(clusterVec);
             }
         }
     }
 
-    Trace aTrace(traceHitList);
-    return aTrace;
-}
-
-
-
-void Trace::tracering(std::map<int, std::vector<Cluster> > &mapOfClusters, std::vector<Trace> &traceVec) {
-    std::vector<double> x;
-    std::vector<double> y;
-    std::vector<double> z;
-    for (auto& clusterMap : mapOfClusters) {
-
-        for (auto& clusterVec : clusterMap.second){
-
-            x.push_back(clusterVec.getPosition()[0]);
-            y.push_back(clusterVec.getPosition()[1]);
-            z.push_back(clusterVec.getPosition()[2]);
-        }
-    }
-
-    std::pair<double,double> linePlanXZ = processHough(z,x);
-    std::pair<double,double> linePlanYZ = processHough(z,y);
-
-    std::vector<Cluster> traceHitList;
-
-    for (auto& clusterMap : mapOfClusters) {
-
-        for (auto& clusterVec : clusterMap.second){
-
-            if(distance(linePlanXZ,
-                        linePlanYZ,
-                        clusterVec.getPosition()[0],
-                        clusterVec.getPosition()[1],
-                        clusterVec.getPosition()[2]) < 100) {
-                traceHitList.push_back(clusterVec);
-            }
-        }
-    }
-
-    if(traceHitList.size()>=5){
-        Trace aTrace(traceHitList);
+    if(traceHitList.size()>=3){
+        Trace* aTrace = new Trace(traceHitList);
         traceVec.push_back(aTrace);
     }
 }
@@ -221,13 +181,14 @@ double Trace::linearRegression() {
     double u=0;
     double v=0;
     double w=0;
-/*    //Visualisation des traces et des clusters
+/*
+    //Visualisation des traces et des clusters
     auto *tCanvas=new TCanvas("tCanvas","tCanvas",1000,800);
     auto *l1 = new TPolyLine3D();
     auto *graph = new TGraph2D();
     int compteur=0;
     for (auto& it : _clusterVec){
-        graph->SetPoint(compteur, it.getPosition()[0], it.getPosition()[1], it.getPosition()[2]);
+        graph->SetPoint(compteur, it->getPosition()[0], it->getPosition()[1], it->getPosition()[2]);
         compteur++;
     }
     graph->SetPoint(compteur,1000,1000,1000);
@@ -237,16 +198,16 @@ double Trace::linearRegression() {
 
     unsigned int nd=0;
     for (auto& it : _clusterVec) {
-        Xm += it.getPosition()[0];
-        Ym += it.getPosition()[1];
-        Zm += it.getPosition()[2];
+        Xm += it->getPosition()[0];
+        Ym += it->getPosition()[1];
+        Zm += it->getPosition()[2];
 
-        Sxx += it.getPosition()[0] * it.getPosition()[0];
-        Sxy += it.getPosition()[0] * it.getPosition()[1];
-        Syy += it.getPosition()[1] * it.getPosition()[1];
-        Sxz += it.getPosition()[0] * it.getPosition()[2];
-        Szz += it.getPosition()[2] * it.getPosition()[2];
-        Syz += it.getPosition()[1] * it.getPosition()[2];
+        Sxx += it->getPosition()[0] * it->getPosition()[0];
+        Sxy += it->getPosition()[0] * it->getPosition()[1];
+        Syy += it->getPosition()[1] * it->getPosition()[1];
+        Sxz += it->getPosition()[0] * it->getPosition()[2];
+        Szz += it->getPosition()[2] * it->getPosition()[2];
+        Syz += it->getPosition()[1] * it->getPosition()[2];
         nd++;
     }
 
@@ -304,7 +265,7 @@ double Trace::linearRegression() {
     if(_clusterVec.empty())
         z0=0;
     else
-        z0=_clusterVec[0].getPosition()[2];
+        z0=_clusterVec[0]->getPosition()[2];
     double t0=(z0-_pointLine[2])/(_vectDirLine[2]/norm);
     for (int i = 0; i < 1000; ++i) {
 
@@ -330,13 +291,13 @@ double Trace::linearRegression() {
 */
     double khi2 = 0;
     for (auto& it : _clusterVec) {
-        double t = (it.getPosition()[2] - _pointLine[2]) / _vectDirLine[2];
+        double t = (it->getPosition()[2] - _pointLine[2]) / _vectDirLine[2];
         double deltaX = (t * _vectDirLine[0] + _pointLine[0]) -
-                        it.getPosition()[0];
+                        it->getPosition()[0];
         double deltaY = (t * _vectDirLine[1] + _pointLine[1]) -
-                        it.getPosition()[1];
-        khi2 += deltaX * deltaX / (it.getSizeClusterX()*10.408 * it.getSizeClusterX()*10.408 / 12.) +
-                deltaY * deltaY / (it.getSizeClusterY()*10.408 * it.getSizeClusterY()*10.408 / 12.);
+                        it->getPosition()[1];
+        khi2 += deltaX * deltaX / (it->getSizeClusterX()*10.408 * it->getSizeClusterX()*10.408 / 12.) +
+                deltaY * deltaY / (it->getSizeClusterY()*10.408 * it->getSizeClusterY()*10.408 / 12.);
     }
     khi2 /= _clusterVec.size();
 
@@ -345,4 +306,5 @@ double Trace::linearRegression() {
 
     return khi2;
 }
+
 

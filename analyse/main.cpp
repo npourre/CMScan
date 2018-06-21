@@ -19,13 +19,20 @@
 #include "analyse.h"
 #include "trace.h"
 
-int analyse::_size_pad=10;
+
+//TODO ajouter les absorb
+//TODO prendre en compte la taille des pads
+int Analyse::_size_pad=10;
 
 int main(int argc, char** argv) {
-    analyse::processGeometry();
+
+    Analyse::processGeometry();
     TApplication theApp("Analysis", &argc, argv);
+
     auto *tCanvas=new TCanvas("tCanvas","tCanvas",1000,800);
-    std::string fileName = "../../CMTScan/cmake-build-debug/data.root";
+
+    /*ouverture du fichier data.root creation de l'arbre et des branches*/
+    std::string fileName = "/data/data.root";
     std::string treeName = "Tracker";
 
     auto* file = new TFile(fileName.c_str(),"READ");
@@ -58,104 +65,131 @@ int main(int argc, char** argv) {
     tree->SetBranchAddress("Z",& _Z, & b_Z);
     tree->SetBranchAddress("Time",& _Time, & b_Time);
 
-    std::mt19937 ran(static_cast<unsigned long>(time(nullptr)));
-    int size_pad=analyse::_size_pad;
-    std::vector<CaloHit> vectCaloHit;
+
+    /*random init*/
+    long seed = std::chrono::steady_clock::now().time_since_epoch().count();
+    std::mt19937 rand_engine(seed);
+    std::uniform_real_distribution<double> real_distribution(0,1);
+    std::uniform_int_distribution<int> multipli_distribution(1,4);
+
+    int size_pad = Analyse::_size_pad;
+    std::vector<CaloHit*> vectCaloHit;
     Int_t actual_event = 1;
     Long64_t nbEntries = tree->GetEntries();
     std::vector <mid_point> resultat;
 
+    clock_t t1, t2;
+    t1 = clock();
+
+    /*boucle sur les valeurs de l'arbre*/
     for (Long64_t i = 0; i < nbEntries; ++i) {
+
         tree->GetEntry(i);
-        std::cout<<"event " << i <<std::endl;
-        //Efficiency
-        if ((ran()/4294967295.)>0.95)
+
+        ///Efficiency
+        if (real_distribution(rand_engine)>0.95)
             continue;
 
+        ///Multiplicity
         if(_eventNb == actual_event){
-            //Add RawHit
-            int x = (static_cast<int>(_X)+500)/size_pad;
-            int y = (static_cast<int>(_Y)+500)/size_pad;
-            int z = _chamberNb;
+            std::vector<std::pair<int, int>> vectPair;
+            std::pair<int, int> coord({(static_cast<int>(_X)+500)/size_pad, (static_cast<int>(_Y)+500)/size_pad});
+            vectPair.push_back(coord);
+
+            int multiplicity = multipli_distribution(rand_engine);
+            generateMulti(vectPair,multiplicity);
+
+            int k = _chamberNb;
             auto time = static_cast<int>(_Time/(200e-9));
 
-            std::vector <int> x_coord_hit_pads;
-            x_coord_hit_pads.push_back(x);
-            std::vector <int> y_coord_hit_pads;
-            y_coord_hit_pads.push_back(y);
 
-            double mult_test=ran()/4294967295.;
-            int nb_mult=1;
-            if (mult_test>0.476 && mult_test<=0.809) //7 chances over 21
-            {
-                //Multiplicity 2
-                nb_mult=2;
-                lightApad(x_coord_hit_pads,y_coord_hit_pads,nb_mult,size_pad);
-            }
-            if (mult_test>0.809) //4 chance over 21
-            {
-                //Multiplicity 3
-                nb_mult=3;
-                lightApad(x_coord_hit_pads,y_coord_hit_pads,nb_mult,size_pad);
-            }
-
-            for (int j = 0; j < nb_mult; ++j) {
-                int tempPos[3] = {x_coord_hit_pads[j], y_coord_hit_pads[j], z};
-                CaloHit aCaloHit(tempPos, 1, time);
+            ///Add calohit
+            for (auto &j : vectPair) {
+                int tempPos[3] = {j.first, j.second, k};
+                auto * aCaloHit = new CaloHit(tempPos, 1, time);
                 vectCaloHit.push_back(aCaloHit);
             }
         }
         else{
+            ///Calcul de la trace qu'il est tout nul et tout lent
             actual_event=_eventNb;
-            std::map<int, std::vector<Cluster>> mapOfClusters;
+
+            std::map<int, std::vector<Cluster*>> mapOfClusters;
             Cluster::clustering(vectCaloHit, mapOfClusters);
-            std::map<int, std::vector<Cluster>> upperCalo;
-            std::map<int, std::vector<Cluster>> lowerCalo;
+            std::map<int, std::vector<Cluster*>> upperCalo;
+            std::map<int, std::vector<Cluster*>> lowerCalo;
 
             for(auto& clusterMap : mapOfClusters) {
                 for (auto &clusterVect : clusterMap.second) {
 
-                    if (clusterVect.getLayerID() < 4)
+                    if (clusterVect->getLayerID() < 4)
                         upperCalo.insert({clusterMap.first, clusterMap.second});
-
                     else
                         lowerCalo.insert({clusterMap.first, clusterMap.second});
                 }
             }
+
             if (upperCalo.size() >= 3 && lowerCalo.size() >=3){
-                Trace upperTrace = Trace::tracering(upperCalo);
-                double khi2=upperTrace.linearRegression();
-                if (khi2==-1)
+                std::vector<Trace*> upperTrace;
+                Trace::tracering(upperCalo, upperTrace);
+                double khi2 = -1;
+                if (!upperTrace.empty()){
+                    khi2 = upperTrace[0]->linearRegression();
+                    if (khi2==-1)
+                        continue;
+                }
+                else
                     continue;
-                Trace lowerTrace = Trace::tracering(lowerCalo);
-                khi2=lowerTrace.linearRegression();
-                if (khi2==-1)
+
+                khi2 = -1;
+                std::vector<Trace*> lowerTrace;
+                Trace::tracering(lowerCalo, lowerTrace);
+                if(!lowerTrace.empty()) {
+                    khi2 = lowerTrace[0]->linearRegression();
+                    if (khi2 == -1)
+                        continue;
+                }
+                else
                     continue;
+
                 auto ** vectortemp=new double* [2];
                 vectortemp[0]=new double [6]; /// x,y,z pour le detecteur du haut
                 vectortemp[1]=new double [6]; /// x,y,z pour le detecteur du bas
-                vectortemp[0][0]=upperTrace.getPointLine()[0];
-                vectortemp[0][1]=upperTrace.getPointLine()[1];
-                vectortemp[0][2]=upperTrace.getPointLine()[2];
-                vectortemp[0][3]=upperTrace.getVectDirLine()[0];
-                vectortemp[0][4]=upperTrace.getVectDirLine()[1];
-                vectortemp[0][5]=upperTrace.getVectDirLine()[2];
-                vectortemp[1][0]=lowerTrace.getPointLine()[0];
-                vectortemp[1][1]=lowerTrace.getPointLine()[1];
-                vectortemp[1][2]=lowerTrace.getPointLine()[2];
-                vectortemp[1][3]=lowerTrace.getVectDirLine()[0];
-                vectortemp[1][4]=lowerTrace.getVectDirLine()[1];
-                vectortemp[1][5]=lowerTrace.getVectDirLine()[2];
+                vectortemp[0][0]=upperTrace[0]->getPointLine()[0];
+                vectortemp[0][1]=upperTrace[0]->getPointLine()[1];
+                vectortemp[0][2]=upperTrace[0]->getPointLine()[2];
+                vectortemp[0][3]=upperTrace[0]->getVectDirLine()[0];
+                vectortemp[0][4]=upperTrace[0]->getVectDirLine()[1];
+                vectortemp[0][5]=upperTrace[0]->getVectDirLine()[2];
+                vectortemp[1][0]=lowerTrace[0]->getPointLine()[0];
+                vectortemp[1][1]=lowerTrace[0]->getPointLine()[1];
+                vectortemp[1][2]=lowerTrace[0]->getPointLine()[2];
+                vectortemp[1][3]=lowerTrace[0]->getVectDirLine()[0];
+                vectortemp[1][4]=lowerTrace[0]->getVectDirLine()[1];
+                vectortemp[1][5]=lowerTrace[0]->getVectDirLine()[2];
                 resultat.push_back(findpoint(vectortemp));
                 delete []vectortemp[0];
                 delete []vectortemp[1];
                 delete []vectortemp;
+
+                delete upperTrace[0];
+                delete lowerTrace[0];
+                for (auto& it : mapOfClusters){
+                    for (auto& vect : it.second)
+                        delete vect;
+                }
+            }
+            for (auto& it : vectCaloHit){
+                delete it;
             }
             vectCaloHit.clear();
-
         }
-        if(i>600)
+        if(i>1000){
+            t2 = clock();
+            std::cout << (float)(t2-t1)/CLOCKS_PER_SEC << std::endl;
             break;
+        }
+
     }
     auto* histo3d = new TH3D("h3", "h3 title", 50, 0, 1000, 50, 0, 1000, 50, -500, 500);
     auto* histo2dXZ = new TH2D("histo2dXZ", "histo2dXZ", 50, 0, 1000, 50, -500, 500);
