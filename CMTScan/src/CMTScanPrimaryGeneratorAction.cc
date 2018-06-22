@@ -25,7 +25,7 @@ CMTScanPrimaryGeneratorAction::CMTScanPrimaryGeneratorAction(const char *inputfi
 				GeometryVariable *_geometryVariable = GeometryVariable::instance();
 				double Detector_Size_X = _geometryVariable->getDetectorSize().getX()/1000.;
 				double Detector_Size_Y = _geometryVariable->getDetectorSize().getY()/1000.;
-				if (Detector_Size_X>Detector_Size_Y)
+				if (Detector_Size_X>=Detector_Size_Y)
 					setup->setParam(CRYSetup::subboxLength,Detector_Size_X);
 				if (Detector_Size_X<Detector_Size_Y)
 					setup->setParam(CRYSetup::subboxLength,Detector_Size_Y);
