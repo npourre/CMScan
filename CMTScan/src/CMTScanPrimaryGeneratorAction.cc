@@ -6,7 +6,7 @@
 //TODO virer le messsenger
 CMTScanPrimaryGeneratorAction::CMTScanPrimaryGeneratorAction(const char *inputfile){
 	// define a particle gun
-	particleGun = new G4ParticleGun();  
+	particleGun = new G4ParticleGun();
 
 	// Read the cry input file
 	std::ifstream inputFile;
@@ -22,7 +22,12 @@ CMTScanPrimaryGeneratorAction::CMTScanPrimaryGeneratorAction(const char *inputfi
         }
 
         CRYSetup *setup = new CRYSetup(setupString, "../data");
+				GeometryVariable *_geometryVariable = GeometryVariable::instance();
 
+				if (_geometryVariable->getDetectorSize()(0)!=1000 || _geometryVariable->getDetectorSize()(1)!=1000)
+				{
+					setup->setParam(CRYSetup::subboxLength,3.);
+				}
         gen = new CRYGenerator(setup);
 
         // set random number generator

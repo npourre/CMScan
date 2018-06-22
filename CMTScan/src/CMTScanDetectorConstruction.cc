@@ -25,8 +25,8 @@ CMTScanDetectorConstruction::CMTScanDetectorConstruction() :
 
 G4VPhysicalVolume* CMTScanDetectorConstruction::Construct() {
     processGeometry();
-	DefineMaterials();  	
-	return DefineVolumes();  
+	DefineMaterials();
+	return DefineVolumes();
 }
 
 void CMTScanDetectorConstruction::DefineMaterials() {
@@ -189,7 +189,7 @@ G4VPhysicalVolume* CMTScanDetectorConstruction::DefineVolumes() {
 	/// RPC_layer
 	/////////////////////////////////////////////////////
 
-	G4Box* RPC_K7T_Sol = 			new G4Box("RPC_K7T_Sol", Detector_Size_X*0.5, Detector_Size_Y*0.5, RPC_K7T_Th*0.5);  
+	G4Box* RPC_K7T_Sol = 			new G4Box("RPC_K7T_Sol", Detector_Size_X*0.5, Detector_Size_Y*0.5, RPC_K7T_Th*0.5);
 	G4Box* RPC_Chip_Sol = 			new G4Box("RPC_Chip_Sol", Detector_Size_X*0.5, Detector_Size_Y*0.5, RPC_Chip_Th*0.5);
 	G4Box* RPC_PCB_Sol = 			new G4Box("RPC_PCB_Sol", Detector_Size_X*0.5, Detector_Size_Y*0.5, RPC_PCB_Th*0.5);
 	G4Box* RPC_MylarAnode_Sol = 	new G4Box("RPC_MylarAnode_Sol", Detector_Size_X*0.5, Detector_Size_Y*0.5, RPC_MylarAnode_Th*0.5);
@@ -260,31 +260,31 @@ G4VPhysicalVolume* CMTScanDetectorConstruction::DefineVolumes() {
 
 	G4double steelThickness = 3 * mm;
 
-	G4Box* outerContainer = new G4Box(	"OuterContainer", 
-			Detector_Size_X*0.5, 
-			Detector_Size_Y*0.5, 
+	G4Box* outerContainer = new G4Box(	"OuterContainer",
+			Detector_Size_X*0.5,
+			Detector_Size_Y*0.5,
 			Dist_Mid*0.5);
 
-	G4Box* innerContainer = new G4Box(	"InnerContainer", 
-			Detector_Size_X*0.5 - steelThickness, 
-			Detector_Size_Y*0.5 - steelThickness, 
-			Dist_Mid*0.5 - steelThickness);	
+	G4Box* innerContainer = new G4Box(	"InnerContainer",
+			Detector_Size_X*0.5 - steelThickness,
+			Detector_Size_Y*0.5 - steelThickness,
+			Dist_Mid*0.5 - steelThickness);
 
-	G4SubtractionSolid* Container = new G4SubtractionSolid(	"Container", 
-			outerContainer, 
+	G4SubtractionSolid* Container = new G4SubtractionSolid(	"Container",
+			outerContainer,
 			innerContainer);
 
-	G4LogicalVolume* Container_Log = new G4LogicalVolume(	Container, 
-			nistManager->FindOrBuildMaterial("cortenSteel"), 
+	G4LogicalVolume* Container_Log = new G4LogicalVolume(	Container,
+			nistManager->FindOrBuildMaterial("cortenSteel"),
 			"Container_Log");
 
-	new G4PVPlacement (	0, 
-			G4ThreeVector(), 
-			Container_Log, 
-			"Container_Phy", 
-			WorldLog, 
-			false, 
-			0, 
+	new G4PVPlacement (	0,
+			G4ThreeVector(),
+			Container_Log,
+			"Container_Phy",
+			WorldLog,
+			false,
+			0,
 			true);
 */
 	/////////////////////////////////////////////////////
@@ -311,7 +311,7 @@ G4VPhysicalVolume* CMTScanDetectorConstruction::DefineVolumes() {
 
 	/////////////////////////////////////////////////////
 
-	CMTScanTrackerSD* SDetector = new CMTScanTrackerSD("CalorimeterSD","TrackerHitsCollection");	
+	CMTScanTrackerSD* SDetector = new CMTScanTrackerSD("CalorimeterSD","TrackerHitsCollection");
 	G4SDParticleFilter* MuonFilter = new G4SDParticleFilter("MuonFilter");
 	MuonFilter->add("mu+");
 	MuonFilter->add("mu-");
@@ -350,23 +350,29 @@ void CMTScanDetectorConstruction::processGeometry() {
 
 
     }
-
-    G4double minZ=1e9;
+		G4double minZ=1e9;
     G4double maxZ=-1e9;
+		G4double maxX=-1e9;
+		G4double maxY=-1e9;
+
 	std::cout<<"-------------------------------------------------"<<std::endl;
     for ( const auto& it : _geometryMap ){
         if(it.second.getZ()>maxZ)
             maxZ=it.second.getZ();
         if(it.second.getZ()<minZ)
             minZ=it.second.getZ();
+				if(fabs(it.second.getY())>maxY)
+						maxY=fabs(it.second.getY());
+				if(fabs(it.second.getX())>maxX)
+						maxX=fabs(it.second.getX());
         std::cout<<"Slot "<<it.first<<":\t"<<
 				 it.second.getX()/cm<<" cm\t"<<
 				 it.second.getY()/cm<<" cm\t"<<
 				 it.second.getZ()/cm<<" cm"<<std::endl;
     }
     std::cout<<"-------------------------------------------------"<<std::endl;
-    G4ThreeVector detector_size(1*m,1*m,maxZ-minZ+RPC_Th);
-    G4ThreeVector world_size(detector_size*1.2);
+    G4ThreeVector detector_size(2*maxX+1*m,2*maxY+1*m,maxZ-minZ+RPC_Th);
+    G4ThreeVector world_size(detector_size*1.2);//1.2
     _geometryVariable->setDetectorSize(detector_size);
     _geometryVariable->setWorldSize(world_size);
 }
