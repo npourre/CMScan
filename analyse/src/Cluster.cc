@@ -33,69 +33,89 @@ Cluster::Cluster(const std::vector<CaloHit*> &vecCaloHit, int sizeClusterX, int 
     _layerID = vecCaloHit.at(0)->getCellID()[2];
 
 }
-//TODO Refaire le clustering
-void Cluster::clustering(std::vector<CaloHit*>& hits, std::map<int, std::vector<Cluster*>>& outCluster) {
-    std::vector<CaloHit*> checkTheUse;
-    std::vector<CaloHit*> clusterHitList;
 
-    for (auto& aCaloHit : hits) {
+/**
+ * \fn static void buildCluster(std::vector<CaloHit*>& caloHitUse, std::vector<CaloHit*>& vectCaloHit, CaloHit* hit, std::vector<CaloHit*>& caloHitSelected)
+ * \brief Fonction recursive qui ajoute au cluster final le calohit si il n'est pas dans le vector caloHitUse et si la distance est inferieur a 1 pad
+ *
+ * @param caloHitUse Liste des calohits déjà selectionner lors du clustering
+ * @param vectCaloHit Liste des calohits initiaux
+ * @param hit Calohit testé sur cette itération
+ * @param caloHitSelected calohits qui composeront le cluster final
+ */
+void Cluster::buildCluster(std::vector<CaloHit*>& caloHitUse, std::vector<CaloHit*>& vectCaloHit, CaloHit* hit, std::vector<CaloHit*>& caloHitSelected) {
 
-        if ( std::find(checkTheUse.begin(),checkTheUse.end(),(aCaloHit)) != checkTheUse.end() )
+    for (auto &aCaloHit : vectCaloHit) {
+
+        if ( std::find(caloHitUse.begin(),caloHitUse.end(),(aCaloHit)) != caloHitUse.end() )
             continue;
-
-        checkTheUse.push_back(aCaloHit);
-        clusterHitList.push_back(aCaloHit);
-
-        for (auto& aSecCaloHit : hits) {
-
-            if (std::find(checkTheUse.begin(), checkTheUse.end(), (aSecCaloHit)) != checkTheUse.end())
-                continue;
-
-            if (checkDistance(checkTheUse, aSecCaloHit)){
-                clusterHitList.push_back(aSecCaloHit);
-                checkTheUse.push_back(aSecCaloHit);
-            }
+        if (std::abs(hit->getCellID()[0]-aCaloHit->getCellID()[0])<=1 &&
+            std::abs(hit->getCellID()[1]-aCaloHit->getCellID()[1])<=1){
+            caloHitUse.push_back(aCaloHit);
+            caloHitSelected.push_back(aCaloHit);
+            buildCluster(caloHitUse, vectCaloHit, aCaloHit, caloHitSelected);
         }
-
-        int minIValue = 100001;
-        int maxIValue = -10000;
-        int minJValue = 100001;
-        int maxJValue = -10000;
-
-        for(auto it : clusterHitList){
-            if(it->getCellID()[0] < minIValue)
-                minIValue = it->getCellID()[0];
-            if(it->getCellID()[1] < minJValue)
-                minJValue = it->getCellID()[1];
-            if(it->getCellID()[0] > maxIValue)
-                maxIValue = it->getCellID()[0];
-            if(it->getCellID()[1] > maxJValue)
-                maxJValue = it->getCellID()[1];
-        }
-
-        if(clusterHitList.size() <= 4 &&
-           abs(maxIValue-minIValue+1) <= 3 &&
-           abs(maxJValue-minJValue+1) <= 3){
-            Cluster* aCluster = new Cluster(clusterHitList, abs(maxIValue-minIValue+1), abs(maxJValue-minJValue+1));
-            outCluster[aCluster->getLayerID()].push_back(aCluster);
-        }
-
-        clusterHitList.clear();
     }
-
 }
 
-bool Cluster::checkDistance(const std::vector<CaloHit*> &checkTheUse, CaloHit* aCaloHit) {
+/**
+ * \fn static void clustering(std::map<int, std::vector<CaloHit*>>& hits, std::map<int, std::vector<Cluster*>> &outCluster)
+ * \brief Fonction qui regroupe les caloHits voisins en cluster
+ *
+ * \example 1001 donnent 2 clusters le premier  1000 et le deuxième 0001
+ *          0100                                0100                0000
+ *          1010                                1010                0000
+ *          0100                                0100                0000
+ *
+ * @param hits Liste des hits à regrouper en cluster.
+ * @param outCluster Liste des clusters incrémentés par la fonction.
+ * @return NULL.
+ */
+//TODO faire un test avec des list et remove après chaque creation.
+void Cluster::clustering(std::map<int, std::vector<CaloHit*>>& hits, std::map<int, std::vector<Cluster*>>& outCluster) {
 
-    bool check = false;
+    for (auto &vectCaloHit : hits){
 
-    for (auto it: checkTheUse){
+        ///Liste des caloHits qui composeront le cluster
+        std::vector<CaloHit*> caloHitSelected;
+        ///Liste des calohits déjà selectionné lors du clustering
+        std::vector<CaloHit*> caloHitUse;
 
-        if(fabs(it->getCellID()[0] - aCaloHit->getCellID()[0]) <=1 &&
-           fabs(it->getCellID()[1] - aCaloHit->getCellID()[1]) <=1 &&
-           fabs(it->getCellID()[2] - aCaloHit->getCellID()[2]) ==0)
-            check=true;
+        for (auto &aCaloHit : vectCaloHit.second){
+
+            if ( std::find(caloHitUse.begin(),caloHitUse.end(),(aCaloHit)) != caloHitUse.end() )
+                continue;
+
+            caloHitUse.push_back(aCaloHit);
+            caloHitSelected.push_back(aCaloHit);
+            buildCluster(caloHitUse, vectCaloHit.second, aCaloHit, caloHitSelected);
+
+            ///On determine la taille du cluster en i j
+            int minIValue = 100001;
+            int maxIValue = -10000;
+            int minJValue = 100001;
+            int maxJValue = -10000;
+
+            for(auto it : caloHitSelected){
+                if(it->getCellID()[0] < minIValue)
+                    minIValue = it->getCellID()[0];
+                if(it->getCellID()[1] < minJValue)
+                    minJValue = it->getCellID()[1];
+                if(it->getCellID()[0] > maxIValue)
+                    maxIValue = it->getCellID()[0];
+                if(it->getCellID()[1] > maxJValue)
+                    maxJValue = it->getCellID()[1];
+            }
+
+            ///On rejete les clusters dont la taille dépasse 3 ou componsé de trop de calohit
+            if(caloHitSelected.size() <= 4 &&
+               abs(maxIValue-minIValue+1) <= 3 &&
+               abs(maxJValue-minJValue+1) <= 3){
+                auto aCluster = new Cluster(caloHitSelected, abs(maxIValue - minIValue + 1), abs(maxJValue - minJValue + 1));
+                outCluster[aCluster->getLayerID()].push_back(aCluster);
+            }
+            caloHitSelected.clear();
+        }
+        caloHitUse.clear();
     }
-
-    return check;
 }

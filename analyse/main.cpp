@@ -19,7 +19,6 @@
 #include "analyse.h"
 #include "trace.h"
 
-
 //TODO ajouter les absorb
 //TODO prendre en compte la taille des pads
 int Analyse::_size_pad=10;
@@ -73,13 +72,17 @@ int main(int argc, char** argv) {
     std::uniform_int_distribution<int> multipli_distribution(1,4);
 
     int size_pad = Analyse::_size_pad;
-    std::vector<CaloHit*> vectCaloHit;
+    std::map<int, std::vector<CaloHit*>> mapCaloHit;
     Int_t actual_event = 1;
     Long64_t nbEntries = tree->GetEntries();
     std::vector <mid_point> resultat;
 
-    clock_t t1, t2;
-    t1 = clock();
+    auto start = std::chrono::high_resolution_clock::now();
+    auto stop = std::chrono::high_resolution_clock::now();
+    auto temps1 = std::chrono::duration_cast<std::chrono::nanoseconds>(stop-start).count();
+    auto temps2 = std::chrono::duration_cast<std::chrono::nanoseconds>(stop-start).count();
+    auto temps3 = std::chrono::duration_cast<std::chrono::nanoseconds>(stop-start).count();
+    auto temps4 = std::chrono::duration_cast<std::chrono::nanoseconds>(stop-start).count();
 
     /*boucle sur les valeurs de l'arbre*/
     for (Long64_t i = 0; i < nbEntries; ++i) {
@@ -89,7 +92,7 @@ int main(int argc, char** argv) {
         ///Efficiency
         if (real_distribution(rand_engine)>0.95)
             continue;
-
+        start = std::chrono::high_resolution_clock::now();
         ///Multiplicity
         if(_eventNb == actual_event){
             std::vector<std::pair<int, int>> vectPair;
@@ -107,15 +110,17 @@ int main(int argc, char** argv) {
             for (auto &j : vectPair) {
                 int tempPos[3] = {j.first, j.second, k};
                 auto * aCaloHit = new CaloHit(tempPos, 1, time);
-                vectCaloHit.push_back(aCaloHit);
+                mapCaloHit[k].push_back(aCaloHit);
             }
         }
         else{
+            stop = std::chrono::high_resolution_clock::now();
+            temps1 += std::chrono::duration_cast<std::chrono::nanoseconds>(stop-start).count();
             ///Calcul de la trace qu'il est tout nul et tout lent
             actual_event=_eventNb;
-
+            start = std::chrono::high_resolution_clock::now();
             std::map<int, std::vector<Cluster*>> mapOfClusters;
-            Cluster::clustering(vectCaloHit, mapOfClusters);
+            Cluster::clustering(mapCaloHit, mapOfClusters);
             std::map<int, std::vector<Cluster*>> upperCalo;
             std::map<int, std::vector<Cluster*>> lowerCalo;
 
@@ -128,11 +133,14 @@ int main(int argc, char** argv) {
                         lowerCalo.insert({clusterMap.first, clusterMap.second});
                 }
             }
+            stop = std::chrono::high_resolution_clock::now();
+            temps2 += std::chrono::duration_cast<std::chrono::nanoseconds>(stop-start).count();
+            start = std::chrono::high_resolution_clock::now();
 
             if (upperCalo.size() >= 3 && lowerCalo.size() >=3){
                 std::vector<Trace*> upperTrace;
                 Trace::tracering(upperCalo, upperTrace);
-                double khi2 = -1;
+                double khi2;
                 if (!upperTrace.empty()){
                     khi2 = upperTrace[0]->linearRegression();
                     if (khi2==-1)
@@ -141,7 +149,6 @@ int main(int argc, char** argv) {
                 else
                     continue;
 
-                khi2 = -1;
                 std::vector<Trace*> lowerTrace;
                 Trace::tracering(lowerCalo, lowerTrace);
                 if(!lowerTrace.empty()) {
@@ -151,6 +158,10 @@ int main(int argc, char** argv) {
                 }
                 else
                     continue;
+
+                stop = std::chrono::high_resolution_clock::now();
+                temps3 += std::chrono::duration_cast<std::chrono::nanoseconds>(stop-start).count();
+                start = std::chrono::high_resolution_clock::now();
 
                 auto ** vectortemp=new double* [2];
                 vectortemp[0]=new double [6]; /// x,y,z pour le detecteur du haut
@@ -172,6 +183,8 @@ int main(int argc, char** argv) {
                 delete []vectortemp[1];
                 delete []vectortemp;
 
+                stop = std::chrono::high_resolution_clock::now();
+                temps4 += std::chrono::duration_cast<std::chrono::nanoseconds>(stop-start).count();
                 delete upperTrace[0];
                 delete lowerTrace[0];
                 for (auto& it : mapOfClusters){
@@ -179,14 +192,17 @@ int main(int argc, char** argv) {
                         delete vect;
                 }
             }
-            for (auto& it : vectCaloHit){
-                delete it;
-            }
-            vectCaloHit.clear();
+            for (auto &vectCaloHit : mapCaloHit)
+                for (auto &aCaloHit : vectCaloHit.second)
+                    delete aCaloHit;
+            mapCaloHit.clear();
         }
         if(i>1000){
-            t2 = clock();
-            std::cout << (float)(t2-t1)/CLOCKS_PER_SEC << std::endl;
+            std::cout << "temps 1 : "<< temps1*1e-9 << std::endl;
+            std::cout << "temps 2 : "<< temps2*1e-9 << std::endl;
+            std::cout << "temps 3 : "<< temps3*1e-9 << std::endl;
+            std::cout << "temps 4 : "<< temps4*1e-9 << std::endl;
+
             break;
         }
 

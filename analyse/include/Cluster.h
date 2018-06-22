@@ -19,8 +19,8 @@ public:
     inline int getSizeClusterX() const { return _sizeClusterX;}
     inline int getSizeClusterY() const { return _sizeClusterY;}
 
-    static void clustering(std::vector<CaloHit*>& hits, std::map<int, std::vector<Cluster*>> &outCluster);
-    static bool checkDistance(const std::vector<CaloHit*> &checkTheUse, CaloHit* aCaloHit);
+    static void clustering(std::map<int, std::vector<CaloHit*>>& hits, std::map<int, std::vector<Cluster*>> &outCluster);
+    static void buildCluster(std::vector<CaloHit*>& caloHitUse, std::vector<CaloHit*>& vectCaloHit, CaloHit* hit, std::vector<CaloHit*>& caloHitSelected);
 
 private:
     double _position[3];

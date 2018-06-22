@@ -61,7 +61,7 @@ void Trace::tracering(std::map<int, std::vector<Cluster*> > &mapOfClusters, std:
     }
 
     if(traceHitList.size()>=3){
-        Trace* aTrace = new Trace(traceHitList);
+        auto * aTrace = new Trace(traceHitList);
         traceVec.push_back(aTrace);
     }
 }
@@ -191,8 +191,8 @@ double Trace::linearRegression() {
         graph->SetPoint(compteur, it->getPosition()[0], it->getPosition()[1], it->getPosition()[2]);
         compteur++;
     }
-    graph->SetPoint(compteur,1000,1000,1000);
-    graph->SetPoint(compteur+1,000,000,000);
+    graph->SetPoint(compteur,1000,1000,500);
+    graph->SetPoint(compteur+1,000,000,-500);
     // Fin Visu
 */
 
