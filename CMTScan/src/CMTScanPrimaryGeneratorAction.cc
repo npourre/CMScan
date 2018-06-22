@@ -23,11 +23,12 @@ CMTScanPrimaryGeneratorAction::CMTScanPrimaryGeneratorAction(const char *inputfi
 
         CRYSetup *setup = new CRYSetup(setupString, "../data");
 				GeometryVariable *_geometryVariable = GeometryVariable::instance();
-
-				if (_geometryVariable->getDetectorSize()(0)!=1000 || _geometryVariable->getDetectorSize()(1)!=1000)
-				{
-					setup->setParam(CRYSetup::subboxLength,3.);
-				}
+				double Detector_Size_X = _geometryVariable->getDetectorSize().getX()/1000.;
+				double Detector_Size_Y = _geometryVariable->getDetectorSize().getY()/1000.;
+				if (Detector_Size_X>Detector_Size_Y)
+					setup->setParam(CRYSetup::subboxLength,Detector_Size_X);
+				if (Detector_Size_X<Detector_Size_Y)
+					setup->setParam(CRYSetup::subboxLength,Detector_Size_Y);
         gen = new CRYGenerator(setup);
 
         // set random number generator
@@ -170,7 +171,7 @@ void CMTScanPrimaryGeneratorAction::GeneratePrimaries(G4Event *anEvent)
 		    GoodMuons.push_back((*vect)[0]);
 		    ReadyToLaunch = true;
 		}
-    }while(!ReadyToLaunch);
+	}while(!ReadyToLaunch);
 
 	for (auto &GoodMuon : GoodMuons) {
 		particleGun->GeneratePrimaryVertex(anEvent);

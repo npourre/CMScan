@@ -11,6 +11,7 @@
 
 #include "filereadstream.h"
 #include "document.h"
+#include <iostream>
 
 //TODO Prendre en compte les translation pour la geometrie et pour la generation de muon.
 
@@ -20,11 +21,11 @@ GeometryVariable *GeometryVariable::_singleton = nullptr;
 CMTScanDetectorConstruction::CMTScanDetectorConstruction() :
 		_geometryFile("../geometry/geometry.json") {
     _geometryVariable=GeometryVariable::instance();
+		processGeometry();
 }
 
 
 G4VPhysicalVolume* CMTScanDetectorConstruction::Construct() {
-    processGeometry();
 	DefineMaterials();
 	return DefineVolumes();
 }
