@@ -9,6 +9,8 @@
 #include <vector>
 #include "TFile.h"
 #include "TTree.h"
+#include "Cluster.h"
+#include "trace.h"
 
 struct mid_point //Structure solution
 {
@@ -16,11 +18,13 @@ struct mid_point //Structure solution
     double* position;   //les x, y, z du point trouvé
 };
 
-
 std::pair<int, int> addPair(std::pair<int, int> p1, std::pair<int, int> p2);
 void generateMulti(std::vector<std::pair<int, int>>& vectPair, int multi);
+void display(std::map<int, std::vector<CaloHit*>>& mapCaloHit ,
+             std::map<int, std::vector<Cluster*>>& mapOfClusters ,
+             std::vector<Trace*>& lowerTrace,
+             std::vector<Trace*>& upperTrace);
 mid_point findpoint (double** dataAB);
-void lightApad(std::vector<int> & x_coord_hit_pads, std::vector<int> & y_coord_hit_pads, int nb_mult,int nb_pad);
 
 class Analyse {
 public :

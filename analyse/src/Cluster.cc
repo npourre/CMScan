@@ -26,12 +26,11 @@ Cluster::Cluster(const std::vector<CaloHit*> &vecCaloHit, int sizeClusterX, int 
         _position[0] += it->getCellID()[0];
         _position[1] += it->getCellID()[1];
     }
-
-    _position[0] = _position[0]/vecCaloHit.size()*10.408;
-    _position[1] = _position[1]/vecCaloHit.size()*10.408;
+    //TODO la taille des pads...
+    _position[0] = _position[0]/vecCaloHit.size()*Analyse::_size_pad;
+    _position[1] = _position[1]/vecCaloHit.size()*Analyse::_size_pad;
     _position[2] = _position[2] = Kpos[vecCaloHit.at(0)->getCellID()[2]]*10;
     _layerID = vecCaloHit.at(0)->getCellID()[2];
-
 }
 
 /**

@@ -13,6 +13,12 @@
 #include <cmath>
 #include "filereadstream.h"
 #include "document.h"
+#include "TPolyLine3D.h"
+#include "TGraph2D.h"
+#include "TCanvas.h"
+#include <thread>
+#include "TH2D.h"
+
 
 std::pair<int, int> addPair(std::pair<int, int> p1, std::pair<int, int> p2){
     std::pair<int, int> p({p1.first+p2.first, p1.second+p2.second});
@@ -31,292 +37,6 @@ void generateMulti(std::vector<std::pair<int, int>>& vectPair, int multi){
         if(newPair.first < 0 || newPair.first > 1000 || newPair.second < 0 || newPair.second > 1000)
             continue;
         vectPair.push_back(newPair);
-    }
-}
-
-void lightApad(std::vector<int> & x_coord_hit_pads, std::vector<int> & y_coord_hit_pads, int nb_mult,int nb_pad)
-{
-    std::mt19937 ran(static_cast<unsigned long>(time(nullptr)));
-    int marker;
-    double random_xy=ran()/4294967295.; //modif on x or y
-    double random_dir=ran()/4294967295.;
-
-    //****** The first pad*********
-    if (random_xy<0.5) //we light on x
-    {
-        if (random_dir<0.5) //+x
-        {
-            if (x_coord_hit_pads.back()+1<nb_pad)
-            {
-                x_coord_hit_pads.push_back(x_coord_hit_pads.back()+1);
-                y_coord_hit_pads.push_back(y_coord_hit_pads.back());
-                marker=1; //marker corresponding to +x
-            }
-            else
-            {
-                x_coord_hit_pads.push_back(x_coord_hit_pads.back()-1);
-                y_coord_hit_pads.push_back(y_coord_hit_pads.back());
-                marker=2;//marker corresponding to -x
-            }
-        }
-        else //-x
-        {
-            if (x_coord_hit_pads.back()-1>0)
-            {
-                x_coord_hit_pads.push_back(x_coord_hit_pads.back()-1);
-                y_coord_hit_pads.push_back(y_coord_hit_pads.back());
-                marker=2;
-            }
-            else
-            {
-                x_coord_hit_pads.push_back(x_coord_hit_pads.back()+1);
-                y_coord_hit_pads.push_back(y_coord_hit_pads.back());
-                marker=1;
-            }
-        }
-    }
-    else //we light on y
-    {
-        if (random_dir<0.5)//+y
-        {
-            if (y_coord_hit_pads.back()+1<nb_pad)
-            {
-                x_coord_hit_pads.push_back(x_coord_hit_pads.back());
-                y_coord_hit_pads.push_back(y_coord_hit_pads.back()+1);
-                marker=3;
-            }
-            else
-            {
-                x_coord_hit_pads.push_back(x_coord_hit_pads.back());
-                y_coord_hit_pads.push_back(y_coord_hit_pads.back()-1);
-                marker=4;
-            }
-        }
-        else //-y
-        {
-            if(y_coord_hit_pads.back()-1>0)
-            {
-                x_coord_hit_pads.push_back(x_coord_hit_pads.back());
-                y_coord_hit_pads.push_back(y_coord_hit_pads.back()-1);
-                marker=4;
-            }
-            else
-            {
-                x_coord_hit_pads.push_back(x_coord_hit_pads.back());
-                y_coord_hit_pads.push_back(y_coord_hit_pads.back()+1);
-                marker=3;
-            }
-        }
-    }
-    //****** Eventual second pad*********
-    if (nb_mult==3) //if there are two to light on
-    {
-        //Different tests are made, for example if we did x+1 to place the first pad
-        //it is forbidden to do x-1 to place the second (or it will be the coordinate of the initial pad)
-        if(marker==1) // if we did x+1 to place the first pad
-        {
-            double random=ran()/4294967295.;
-            if (random<=(1./3.)) //it remains 3 choices
-            {
-                if (x_coord_hit_pads.back()+1<nb_pad)
-                {
-                    x_coord_hit_pads.push_back(x_coord_hit_pads.back()+1);
-                    y_coord_hit_pads.push_back(y_coord_hit_pads.back());
-                }
-                else
-                { //because x-1 is forbidden we do the modif on y but we have to verify the border limit
-                    if (y_coord_hit_pads.back()+1<nb_pad)
-                    {
-                        x_coord_hit_pads.push_back(x_coord_hit_pads.back());
-                        y_coord_hit_pads.push_back(y_coord_hit_pads.back()+1);
-                    }
-                    else
-                    {
-                        x_coord_hit_pads.push_back(x_coord_hit_pads.back());
-                        y_coord_hit_pads.push_back(y_coord_hit_pads.back()-1);
-                    }
-                }
-            }
-            if (random>(1./3.) && random<=(2./3.))
-            {
-                if (y_coord_hit_pads.back()+1<nb_pad)
-                {
-                    x_coord_hit_pads.push_back(x_coord_hit_pads.back());
-                    y_coord_hit_pads.push_back(y_coord_hit_pads.back()+1);
-                }
-                else
-                {
-                    x_coord_hit_pads.push_back(x_coord_hit_pads.back());
-                    y_coord_hit_pads.push_back(y_coord_hit_pads.back()-1);
-                }
-            }
-            if (random>(2./3.) && random<=1.)
-            {
-                if (y_coord_hit_pads.back()-1>0)
-                {
-                    x_coord_hit_pads.push_back(x_coord_hit_pads.back());
-                    y_coord_hit_pads.push_back(y_coord_hit_pads.back()-1);
-                }
-                else
-                {
-                    x_coord_hit_pads.push_back(x_coord_hit_pads.back());
-                    y_coord_hit_pads.push_back(y_coord_hit_pads.back()+1);
-                }
-            }
-        }
-        if(marker==2) // if we did x-1 to place the first pad
-        {
-            double random=ran()/4294967295.;
-            if (random<=(1./3.)) //it remains 3 choices
-            {
-                if (x_coord_hit_pads.back()-1>0)
-                {
-                    x_coord_hit_pads.push_back(x_coord_hit_pads.back()-1);
-                    y_coord_hit_pads.push_back(y_coord_hit_pads.back());
-                }
-                else
-                { //because x+1 is forbidden we do the modif on y but we have to verify the border limit
-                    if(y_coord_hit_pads.back()-1>0)
-                    {
-                        x_coord_hit_pads.push_back(x_coord_hit_pads.back());
-                        y_coord_hit_pads.push_back(y_coord_hit_pads.back()-1);
-                    }
-                    else
-                    {
-                        x_coord_hit_pads.push_back(x_coord_hit_pads.back());
-                        y_coord_hit_pads.push_back(y_coord_hit_pads.back()+1);
-                    }
-                }
-            }
-            if (random>(1./3.) && random<=(2./3.))
-            {
-                if (y_coord_hit_pads.back()+1<nb_pad)
-                {
-                    x_coord_hit_pads.push_back(x_coord_hit_pads.back());
-                    y_coord_hit_pads.push_back(y_coord_hit_pads.back()+1);
-                }
-                else
-                {
-                    x_coord_hit_pads.push_back(x_coord_hit_pads.back());
-                    y_coord_hit_pads.push_back(y_coord_hit_pads.back()-1);
-                }
-            }
-            if (random>(2./3.) && random<=1.)
-            {
-                if (y_coord_hit_pads.back()-1>0)
-                {
-                    x_coord_hit_pads.push_back(x_coord_hit_pads.back());
-                    y_coord_hit_pads.push_back(y_coord_hit_pads.back()-1);
-                }
-                else
-                {
-                    x_coord_hit_pads.push_back(x_coord_hit_pads.back());
-                    y_coord_hit_pads.push_back(y_coord_hit_pads.back()+1);
-                }
-            }
-        }
-        if(marker==3) // if we did y+1 to place the first pad
-        {
-            double random=ran()/4294967295.;
-            if (random<=(1./3.)) //it remains 3 choices
-            {
-                if (x_coord_hit_pads.back()+1<nb_pad)
-                {
-                    x_coord_hit_pads.push_back(x_coord_hit_pads.back()+1);
-                    y_coord_hit_pads.push_back(y_coord_hit_pads.back());
-                }
-                else
-                {
-                    x_coord_hit_pads.push_back(x_coord_hit_pads.back()-1);
-                    y_coord_hit_pads.push_back(y_coord_hit_pads.back());
-                }
-            }
-            if (random>(1./3.) && random<=(2./3.))
-            {
-                if (x_coord_hit_pads.back()-1>0)
-                {
-                    x_coord_hit_pads.push_back(x_coord_hit_pads.back()-1);
-                    y_coord_hit_pads.push_back(y_coord_hit_pads.back());
-                }
-                else
-                {
-                    x_coord_hit_pads.push_back(x_coord_hit_pads.back()+1);
-                    y_coord_hit_pads.push_back(y_coord_hit_pads.back());
-                }
-            }
-            if (random>(2./3.) && random<=1.)
-            {
-                if (y_coord_hit_pads.back()+1<nb_pad)
-                {
-                    x_coord_hit_pads.push_back(x_coord_hit_pads.back());
-                    y_coord_hit_pads.push_back(y_coord_hit_pads.back()+1);
-                }
-                else
-                {//because y-1 is forbidden we do the modif on x but we have to verify the border limit
-                    if (x_coord_hit_pads.back()+1<nb_pad)
-                    {
-                        x_coord_hit_pads.push_back(x_coord_hit_pads.back()+1);
-                        y_coord_hit_pads.push_back(y_coord_hit_pads.back());
-                    }
-                    else
-                    {
-                        x_coord_hit_pads.push_back(x_coord_hit_pads.back()-1);
-                        y_coord_hit_pads.push_back(y_coord_hit_pads.back());
-                    }
-                }
-            }
-        }
-        if(marker==4) // if we did y-1 to place the first pad
-        {
-            double random=ran()/4294967295.;
-            if (random<=(1./3.)) //it remains 3 choices
-            {
-                if (x_coord_hit_pads.back()+1<nb_pad)
-                {
-                    x_coord_hit_pads.push_back(x_coord_hit_pads.back()+1);
-                    y_coord_hit_pads.push_back(y_coord_hit_pads.back());
-                }
-                else
-                {
-                    x_coord_hit_pads.push_back(x_coord_hit_pads.back()-1);
-                    y_coord_hit_pads.push_back(y_coord_hit_pads.back());
-                }
-            }
-            if (random>(1./3.) && random<=(2./3.))
-            {
-                if (x_coord_hit_pads.back()-1>0)
-                {
-                    x_coord_hit_pads.push_back(x_coord_hit_pads.back()-1);
-                    y_coord_hit_pads.push_back(y_coord_hit_pads.back());
-                }
-                else
-                {
-                    x_coord_hit_pads.push_back(x_coord_hit_pads.back()+1);
-                    y_coord_hit_pads.push_back(y_coord_hit_pads.back());
-                }
-            }
-            if (random>(2./3.) && random<=1.)
-            {
-                if (y_coord_hit_pads.back()-1>0)
-                {
-                    x_coord_hit_pads.push_back(x_coord_hit_pads.back());
-                    y_coord_hit_pads.push_back(y_coord_hit_pads.back()-1);
-                }
-                else
-                {//because y+1 is forbidden we do the modif on x but we have to verify the border limit
-                    if (x_coord_hit_pads.back()+1<nb_pad)
-                    {
-                        x_coord_hit_pads.push_back(x_coord_hit_pads.back()+1);
-                        y_coord_hit_pads.push_back(y_coord_hit_pads.back());
-                    }
-                    else
-                    {
-                        x_coord_hit_pads.push_back(x_coord_hit_pads.back()-1);
-                        y_coord_hit_pads.push_back(y_coord_hit_pads.back());
-                    }
-                }
-            }
-        }
     }
 }
 
@@ -345,6 +65,86 @@ void Analyse::processGeometry() {
     }
 }
 
+void display(std::map<int, std::vector<CaloHit*>>& mapCaloHit ,
+             std::map<int, std::vector<Cluster*>>& mapOfClusters ,
+             std::vector<Trace*>& lowerTrace,
+             std::vector<Trace*>& upperTrace){
+
+    auto *c1 = new TCanvas("tCanvas","tCanvas",1200,800);
+    auto *trace_top = new TPolyLine3D();
+    auto *trace_bot = new TPolyLine3D();
+    auto *graph_cluster = new TGraph2D();
+    auto *graph_calohit = new TGraph2D();
+    auto *graph_rootsux = new TGraph2D();
+
+    graph_rootsux->SetPoint(0,0,0,-400);
+    graph_rootsux->SetPoint(1,1000,1000, 400);
+
+    int size_pad = Analyse::_size_pad;
+    int i = 0;
+    for (auto &vectCalohit : mapCaloHit){
+        for (auto &calohit : vectCalohit.second){
+            graph_calohit->SetPoint(i, calohit->getCellID()[0]*size_pad, calohit->getCellID()[1]*size_pad, Analyse::_geometryMap[calohit->getCellID()[2]]*10);
+            i++;
+        }
+    }
+
+    i=0;
+    for (auto &vectCluster : mapOfClusters){
+        for (auto &cluster : vectCluster.second ){
+            graph_cluster->SetPoint(i,cluster->getPosition()[0], cluster->getPosition()[1], cluster->getPosition()[2]);
+            i++;
+        }
+    }
+
+    double norm = std::sqrt(lowerTrace[0]->getVectDirLine()[0]*lowerTrace[0]->getVectDirLine()[0]+
+                            lowerTrace[0]->getVectDirLine()[1]*lowerTrace[0]->getVectDirLine()[1]+
+                            lowerTrace[0]->getVectDirLine()[2]*lowerTrace[0]->getVectDirLine()[2]);
+
+    Double_t x,y,z;
+    for (int j = 0; j < 1000; ++j) {
+        x = lowerTrace[0]->getPointLine()[0] + (j*10.-3000)*lowerTrace[0]->getVectDirLine()[0]/norm;
+        y = lowerTrace[0]->getPointLine()[1] + (j*10.-3000)*lowerTrace[0]->getVectDirLine()[1]/norm;
+        z = lowerTrace[0]->getPointLine()[2] + (j*10.-3000)*lowerTrace[0]->getVectDirLine()[2]/norm;
+        trace_bot->SetPoint(j,x,y,z);
+    }
+
+    norm = std::sqrt(upperTrace[0]->getVectDirLine()[0]*upperTrace[0]->getVectDirLine()[0]+
+                     upperTrace[0]->getVectDirLine()[1]*upperTrace[0]->getVectDirLine()[1]+
+                     upperTrace[0]->getVectDirLine()[2]*upperTrace[0]->getVectDirLine()[2]);
+
+    for (int k = 0; k < 1000; ++k) {
+        x = upperTrace[0]->getPointLine()[0] + (k*10.-3000)*upperTrace[0]->getVectDirLine()[0]/norm;
+        y = upperTrace[0]->getPointLine()[1] + (k*10.-3000)*upperTrace[0]->getVectDirLine()[1]/norm;
+        z = upperTrace[0]->getPointLine()[2] + (k*10.-3000)*upperTrace[0]->getVectDirLine()[2]/norm;
+        trace_top->SetPoint(k,x,y,z);
+    }
+
+    graph_rootsux->Draw("p0");
+    graph_calohit->SetMarkerSize(2);
+    graph_calohit->SetMarkerStyle(20);
+    graph_calohit->SetMarkerColor(40);
+    graph_calohit->Draw("p same");
+    graph_cluster->SetMarkerSize(1);
+    graph_cluster->SetMarkerColor(42);
+    graph_cluster->SetMarkerStyle(21);
+    graph_cluster->Draw("p same");
+    trace_bot->SetLineColor(kRed);
+    trace_bot->Draw("SAME");
+    trace_top->SetLineColor(kBlue);
+    trace_top->Draw("SAME");
+
+    c1->Update();
+    
+    std::this_thread::sleep_for(std::chrono::milliseconds(1000));
+
+    delete graph_rootsux;
+    delete trace_bot;
+    delete trace_top;
+    delete graph_calohit;
+    delete graph_cluster;
+    delete c1;
+}
 
 mid_point findpoint (double** dataAB)
 {
