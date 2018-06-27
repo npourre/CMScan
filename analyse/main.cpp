@@ -31,7 +31,7 @@ int main(int argc, char** argv) {
     auto *tCanvas=new TCanvas("tCanvas","tCanvas",1000,800);
 
     /*ouverture du fichier data.root creation de l'arbre et des branches*/
-    std::string fileName = "/data/data.root";
+    std::string fileName = "data10e5.root"; //Juste parce que je met le fichier data dans le meme dossier
     std::string treeName = "Tracker";
 
     auto* file = new TFile(fileName.c_str(),"READ");
@@ -133,9 +133,7 @@ int main(int argc, char** argv) {
 
                 if (nextEpisode){
 
-                    auto ** vectortemp=new double* [2];
-                    vectortemp[0]=new double [6]; /// x,y,z pour le detecteur du haut
-                    vectortemp[1]=new double [6]; /// x,y,z pour le detecteur du bas
+                    double vectortemp [2][6];
                     vectortemp[0][0]=upperTrace[0]->getPointLine()[0];
                     vectortemp[0][1]=upperTrace[0]->getPointLine()[1];
                     vectortemp[0][2]=upperTrace[0]->getPointLine()[2];
@@ -149,20 +147,6 @@ int main(int argc, char** argv) {
                     vectortemp[1][4]=lowerTrace[0]->getVectDirLine()[1];
                     vectortemp[1][5]=lowerTrace[0]->getVectDirLine()[2];
                     resultat.push_back(findpoint(vectortemp));
-
-                    for (int j = 0; j < 6; ++j) {
-                        if(vectortemp[0][i]==0){
-                            std::cout<<"perdu"<<std::endl;
-                            display(mapCaloHit,mapOfClusters,lowerTrace,upperTrace);
-                        }
-                        if(vectortemp[1][i]==0){
-                            std::cout<<"perdu"<<std::endl;
-                            display(mapCaloHit,mapOfClusters,lowerTrace,upperTrace);
-                        }
-                    }
-                    delete []vectortemp[0];
-                    delete []vectortemp[1];
-                    delete []vectortemp;
 
 //                    display(mapCaloHit,mapOfClusters,lowerTrace,upperTrace);
 

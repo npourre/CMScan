@@ -16,6 +16,7 @@
 #include "TPolyLine3D.h"
 #include "TGraph2D.h"
 #include "TCanvas.h"
+#include "TDecompSVD.h"
 #include <thread>
 #include "TH2D.h"
 
@@ -135,7 +136,7 @@ void display(std::map<int, std::vector<CaloHit*>>& mapCaloHit ,
     trace_top->Draw("SAME");
 
     c1->Update();
-    
+
     std::this_thread::sleep_for(std::chrono::milliseconds(1000));
 
     delete graph_rootsux;
@@ -146,7 +147,7 @@ void display(std::map<int, std::vector<CaloHit*>>& mapCaloHit ,
     delete c1;
 }
 
-mid_point findpoint (double** dataAB)
+mid_point findpoint (double dataAB[][6])
 {
     double SMALL_NUM=0.00000001; //Pour éviter de diviser par zéro
     //On a deux vecteurs définis par un point et une direction
@@ -197,7 +198,7 @@ mid_point findpoint (double** dataAB)
 //Résolution d'un systeme linaire pour connaitre les coordonnées du segment
 //le plus court qui lie les deux droites
     //Equation de type A(Coeff)*x=B(vB)
-    TMatrixT <double> Coeff (8,8);
+    TMatrixT <double> Coeff (9,9);  //J'ai rajouté une équation au système pour mieux le contraindre
     Coeff (0,0)=-1.; //Première equation (Numéro equa, numéro inconnue)
     Coeff (0,3)=1.;
     Coeff (1,1)=-1;
@@ -212,9 +213,12 @@ mid_point findpoint (double** dataAB)
     Coeff (5,6)=-Ad(2);
     Coeff (6,3)=1;
     Coeff (6,7)=-Bd(0);
-    Coeff (7,4)=1;
+    Coeff (7,4)=1.;
     Coeff (7,7)=-Bd(1);
-    TVectorT <double> vB (8);
+    Coeff (8,5)=1.;
+    Coeff (8,7)=-Bd(2);
+
+    TVectorT <double> vB (9);
     vB(0)=dP(0);
     vB(1)=dP(1);
     vB(2)=dP(2);
@@ -223,8 +227,12 @@ mid_point findpoint (double** dataAB)
     vB(5)=A(2);
     vB(6)=B(0);
     vB(7)=B(1);
-    TVectorT <double> Sol (8);
-    Sol=Coeff.Invert()*vB;    //Résolution du SystemeLineaire
+    vB(8)=B(2);
+
+    TVectorT <double> Sol (9);
+    TDecompSVD dec (Coeff);
+    dec.Invert(Coeff);
+    Sol=Coeff*vB; //Résolution du SystemeLineaire
     //On récupère les coordonnées du point du segment sur la droite venant du haut
     TVectorT <double> N (3);
     N(0)=Sol(0);
@@ -240,14 +248,10 @@ mid_point findpoint (double** dataAB)
     Mid(0)=(N(0)+Np(0))/2.;
     Mid(1)=(N(1)+Np(1))/2.;
     Mid(2)=(N(2)+Np(2))/2.;
-    /*cout<<"Les coordonnées du point trouve entre les droites:"<<endl
-    <<"x="<<Mid(0)<<endl<<"y="<<Mid(1)<<endl<<"z="<<Mid(2)<<endl<<endl;*/
 
     //Calcul de l'angle entre les deux traces (celles du haut et celles du bas)
     double theta;
     theta=acos(b/(sqrt(a)*sqrt(c)));  //b, c et a on été calculés précedemment
-    /*cout<<"L'angle entre les deux vecteurs vaut: "<<theta<<" radians donc "
-    <<theta*360/(2.*M_PI)<<" degres."<<endl;*/
 
     mid_point resultat{};   //On crée notre objet resultat
     resultat.position=new double [3];

@@ -24,7 +24,7 @@ void display(std::map<int, std::vector<CaloHit*>>& mapCaloHit ,
              std::map<int, std::vector<Cluster*>>& mapOfClusters ,
              std::vector<Trace*>& lowerTrace,
              std::vector<Trace*>& upperTrace);
-mid_point findpoint (double** dataAB);
+mid_point findpoint (double dataAB [][6]);
 
 class Analyse {
 public :
