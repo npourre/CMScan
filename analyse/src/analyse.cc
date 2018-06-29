@@ -11,6 +11,7 @@
 #include "TMatrixT.h"
 #include "TVectorT.h"
 #include <cmath>
+#include <math.h>
 #include "filereadstream.h"
 #include "document.h"
 #include "TPolyLine3D.h"
@@ -69,7 +70,7 @@ void Analyse::processGeometry() {
 void display(std::map<int, std::vector<CaloHit*>>& mapCaloHit ,
              std::map<int, std::vector<Cluster*>>& mapOfClusters ,
              std::vector<Trace*>& lowerTrace,
-             std::vector<Trace*>& upperTrace){
+             std::vector<Trace*>& upperTrace, mid_point resu){
 
     auto *c1 = new TCanvas("tCanvas","tCanvas",1200,800);
     auto *trace_top = new TPolyLine3D();
@@ -147,27 +148,13 @@ void display(std::map<int, std::vector<CaloHit*>>& mapCaloHit ,
     delete c1;
 }
 
-mid_point findpoint (double dataAB[][6])
+mid_point findpoint (Trace* upperTrace, Trace* lowerTrace)
 {
     double SMALL_NUM=0.00000001; //Pour éviter de diviser par zéro
-    //On a deux vecteurs définis par un point et une direction
-    TVectorT <double> A(3); //Point A correspond au detect haut
-    A(0)=dataAB[0][0]; //[haut=0;bas=1][x=0;y=1;z=2]
-    A(1)=dataAB[0][1];
-    A(2)=dataAB[0][2];
-    TVectorT <double> B(3); //Point B correspond au detect bas
-    B(0)=dataAB[1][0];
-    B(1)=dataAB[1][1];
-    B(2)=dataAB[1][2];
-    TVectorT <double> Ad(3); // Vecteur directeur de la trace du haut
-    Ad(0)=dataAB[0][3]; //[haut=0;bas=1][u=3;v=4;w=5]
-    Ad(1)=dataAB[0][4];
-    Ad(2)=dataAB[0][5];
-    TVectorT <double> Bd(3); // Vecteur directeur de la trace du bas
-    Bd(0)=dataAB[1][3];
-    Bd(1)=dataAB[1][4];
-    Bd(2)=dataAB[1][5];
-
+    TVectorT <double> A(3,upperTrace->getPointLine()); //Point A correspond au detect haut
+    TVectorT <double> B(3,lowerTrace->getPointLine()); //Point B correspond au detect bas
+    TVectorT <double> Ad(3,upperTrace->getVectDirLine()); // Vecteur directeur de la trace du haut
+    TVectorT <double> Bd(3,lowerTrace->getVectDirLine()); // Vecteur directeur de la trace du bas
     TVectorT <double> w(3); //un vecteur qui relie A et B
     w(0)=B(0)-A(0);
     w(1)=B(1)-A(1);
@@ -179,30 +166,39 @@ mid_point findpoint (double dataAB[][6])
     double e=Bd*w;
     double D=a*c-b*b;
     double sc, tc;
-    if (D < SMALL_NUM) // the lines are almost parallel
-    {
+    if (D < SMALL_NUM){ // the lines are almost parallel
         sc = 0.0;
-        tc = (b>c ? d/b : e/c);    // use the largest denominator
-    }
-    else
-    {
+        tc = (b>c ? d/b : e/c);}    // use the largest denominator
+    else{
         sc = (b*e - c*d) / D;
-        tc = (a*e - b*d) / D;
-    }
+        tc = (a*e - b*d) / D;}
     TVectorT <double> dP(3); //Le vecteur le plus court
     for (int i=0;i<3;i++)
-    {
         dP(i)=w(i)+(sc*Ad(i))-(tc*Bd(i));
-    }
-
-//Résolution d'un systeme linaire pour connaitre les coordonnées du segment
-//le plus court qui lie les deux droites
-    //Equation de type A(Coeff)*x=B(vB)
-    TMatrixT <double> Coeff (9,9);  //J'ai rajouté une équation au système pour mieux le contraindre
-    Coeff (0,0)=-1.; //Première equation (Numéro equa, numéro inconnue)
-    Coeff (0,3)=1.;
-    Coeff (1,1)=-1;
-    Coeff (1,4)=1;
+/*Résolution d'un systeme linaire pour connaitre les coordonnées du segment
+   le plus court qui lie les deux droites.
+  Soit le point N (N0,N1,N2) le point sur la trace du haut à l'endroit où les traces
+    sont les plus proches.
+  Soit N' (N'0,N'1,N'2) sont homologue sur la trace du bas.
+  Soit le vecteur dP (dP0,dP1,dP2) qui est le vecteur le plus court entre les deux droites.
+    N et N' sont respectivement les extremités de dP.
+  Soit la droite qui passe par A(A0,A1,A2) et de vecteur dir Ad(Ad0,Ad1,Ad2) correspondant
+    à la trace du haut.
+  Soit la droite qui passe par B(B0,B1,B2) et de vecteur dir Bd(Bd0,Bd1,Bd2) correspondant
+    à la trace du bas.
+  On a donc les équations suivantes:
+  (0)    N'0-N0=dP0   // (1) N'1-N1=dP1  // (2) N'2-N2=dP2   (car les N et N' sont reliés par le vecteur dP)
+  (3)    N0-tAd0=A0   // (4) N1-tAd1=A1  // (5) N2-tAd2=A2   (car N est sur la droite (A,dir=Ad))
+  (6)    N'0-t'Bd0=B0  // (7) N'1-t'Bd1=B1 // (8) N'2-t'Bd2 =B2 (car N' est sur la droite (B,dir=Bd))
+  On référence les inconnues comme ceci:
+  (0) N0 // (1) N1 // (2) N2 // (3) N'0 // (4) N'1 // (5) N'2 // (6) t // (7) t'
+  On construit les matrices Coeff et vB pour résoudre le système linéaire.
+    Equation de type Coeff*x=vB*/
+    TMatrixT <double> Coeff (9,9);
+    Coeff (0,0)=-1.; //Première equation (Numéro equation,numéro inconnue)
+    Coeff (0,3)=1.; //Dans l'équation (0) on a bien 1*N'0 et -1*N0
+    Coeff (1,1)=-1; //Dans l'équation (1) on a -1*N1 et 1*N'1
+    Coeff (1,4)=1;  // etc...
     Coeff (2,2)=-1;
     Coeff (2,5)=1;
     Coeff (3,0)=1;
@@ -219,7 +215,7 @@ mid_point findpoint (double dataAB[][6])
     Coeff (8,7)=-Bd(2);
 
     TVectorT <double> vB (9);
-    vB(0)=dP(0);
+    vB(0)=dP(0); //Le terme de droite de l'équation (0) est dP(0)
     vB(1)=dP(1);
     vB(2)=dP(2);
     vB(3)=A(0);
@@ -233,26 +229,21 @@ mid_point findpoint (double dataAB[][6])
     TDecompSVD dec (Coeff);
     dec.Invert(Coeff);
     Sol=Coeff*vB; //Résolution du SystemeLineaire
-    //On récupère les coordonnées du point du segment sur la droite venant du haut
-    TVectorT <double> N (3);
-    N(0)=Sol(0);
-    N(1)=Sol(1);
-    N(2)=Sol(2);
-    //Et les coordonnées du point du segment sur la droite venant du bas
-    TVectorT <double> Np (3);
-    Np(0)=Sol(3);
-    Np(1)=Sol(4);
-    Np(2)=Sol(5);
+
     //On cherche les coordonnées du point du milieu
     TVectorT <double> Mid (3);
-    Mid(0)=(N(0)+Np(0))/2.;
-    Mid(1)=(N(1)+Np(1))/2.;
-    Mid(2)=(N(2)+Np(2))/2.;
+    Mid(0)=(Sol(0)+Sol(3))/2.;
+    Mid(1)=(Sol(1)+Sol(4))/2.;
+    Mid(2)=(Sol(2)+Sol(5))/2.;
 
     //Calcul de l'angle entre les deux traces (celles du haut et celles du bas)
     double theta;
-    theta=acos(b/(sqrt(a)*sqrt(c)));  //b, c et a on été calculés précedemment
-
+    double u=b/(sqrt(a)*sqrt(c));
+    if (u<-1) //Pour que u soit dans l'ensemble de definition de acos()
+      u=-1;
+    if (u>1)
+      u=1;
+    theta=M_PI-acos(u);  //b, c et a on été calculés précedemment
     mid_point resultat{};   //On crée notre objet resultat
     resultat.position=new double [3];
     for (int i=0;i<3;i++)

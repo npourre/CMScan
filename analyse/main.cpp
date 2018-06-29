@@ -21,7 +21,7 @@
 
 //TODO ajouter les absorb
 //TODO prendre en compte la taille des pads
-int Analyse::_size_pad=10;
+int Analyse::_size_pad=1;
 
 int main(int argc, char** argv) {
 
@@ -31,7 +31,7 @@ int main(int argc, char** argv) {
     auto *tCanvas=new TCanvas("tCanvas","tCanvas",1000,800);
 
     /*ouverture du fichier data.root creation de l'arbre et des branches*/
-    std::string fileName = "data10e5.root"; //Juste parce que je met le fichier data dans le meme dossier
+    std::string fileName = "data10e5Pb.root"; //Juste parce que je met le fichier data dans le meme dossier
     std::string treeName = "Tracker";
 
     auto* file = new TFile(fileName.c_str(),"READ");
@@ -80,7 +80,8 @@ int main(int argc, char** argv) {
     /*boucle sur les valeurs de l'arbre*/
     for (Long64_t i = 0; i < nbEntries; ++i) {
         tree->GetEntry(i);
-
+        if (i%10000==0)
+        std::cout<<"event:"<<actual_event<<std::endl;
         ///Efficiency
         if (real_distribution(rand_engine)>0.95)
             continue;
@@ -132,24 +133,8 @@ int main(int argc, char** argv) {
                 }
 
                 if (nextEpisode){
-
-                    double vectortemp [2][6];
-                    vectortemp[0][0]=upperTrace[0]->getPointLine()[0];
-                    vectortemp[0][1]=upperTrace[0]->getPointLine()[1];
-                    vectortemp[0][2]=upperTrace[0]->getPointLine()[2];
-                    vectortemp[0][3]=upperTrace[0]->getVectDirLine()[0];
-                    vectortemp[0][4]=upperTrace[0]->getVectDirLine()[1];
-                    vectortemp[0][5]=upperTrace[0]->getVectDirLine()[2];
-                    vectortemp[1][0]=lowerTrace[0]->getPointLine()[0];
-                    vectortemp[1][1]=lowerTrace[0]->getPointLine()[1];
-                    vectortemp[1][2]=lowerTrace[0]->getPointLine()[2];
-                    vectortemp[1][3]=lowerTrace[0]->getVectDirLine()[0];
-                    vectortemp[1][4]=lowerTrace[0]->getVectDirLine()[1];
-                    vectortemp[1][5]=lowerTrace[0]->getVectDirLine()[2];
-                    resultat.push_back(findpoint(vectortemp));
-
-//                    display(mapCaloHit,mapOfClusters,lowerTrace,upperTrace);
-
+                    resultat.push_back(findpoint(upperTrace[0],lowerTrace[0]));
+                    //display(mapCaloHit,mapOfClusters,lowerTrace,upperTrace);
                 }
                 for (auto &it : lowerTrace){
                     delete it;
@@ -196,22 +181,23 @@ int main(int argc, char** argv) {
             mapCaloHit[k].push_back(aCaloHit);
         }
 
-        if(i>10000){
-            break;
-        }
+        //if(i>10000){
+        //    break;
+        //}
 
     }
-    auto* histo3d = new TH3D("h3", "h3 title", 50, 0, 1000, 50, 0, 1000, 50, -500, 500);
-    auto* histo2dXZ = new TH2D("histo2dXZ", "histo2dXZ", 50, 0, 1000, 50, -500, 500);
-    auto* histo2dYZ = new TH2D("histo2dYZ", "histo2dYZ", 50, 0, 1000, 50, -500, 500);
+    auto* histo3d = new TH3D("h3", "h3 title", 50, 0, 1000, 50, 0, 1000, 50, -1200, 1200);
+    auto* histo2dXZ = new TH2D("histo2dXZ", "histo2dXZ", 50, 0, 1000, 50, -1200, 1200);
+    auto* histo2dYZ = new TH2D("histo2dYZ", "histo2dYZ", 50, 0, 1000, 50, -1200, 1200);
+    std::cout<<"On a quelque chose?="<<resultat.size()<<std::endl;
     for (auto& it : resultat) {
         if(it.position[0] > 0 &&
            it.position[0] < 1000 &&
            it.position[1] > 0 &&
            it.position[1] < 1000 &&
-           it.position[2] > -200 &&
-           it.position[2] < 200 &&
-           fabs(it.angle)>5*M_PI/180){
+           it.position[2] > -1200 &&
+           it.position[2] < 1200 &&
+           fabs(it.angle)>10*M_PI/180){
             histo3d->Fill(it.position[0],it.position[1],it.position[2]);
             histo2dXZ->Fill(it.position[0],it.position[2]);
             histo2dYZ->Fill(it.position[1],it.position[2]);
