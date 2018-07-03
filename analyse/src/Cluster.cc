@@ -26,7 +26,7 @@ Cluster::Cluster(const std::vector<CaloHit*> &vecCaloHit, int sizeClusterX, int 
         _position[0] += it->getCellID()[0];
         _position[1] += it->getCellID()[1];
     }
-    //TODO la taille des pads...
+
     _position[0] = _position[0]/vecCaloHit.size()*Analyse::_size_pad;
     _position[1] = _position[1]/vecCaloHit.size()*Analyse::_size_pad;
     _position[2] = _position[2] = Kpos[vecCaloHit.at(0)->getCellID()[2]]*10;
@@ -70,7 +70,6 @@ void Cluster::buildCluster(std::vector<CaloHit*>& caloHitUse, std::vector<CaloHi
  * @param outCluster Liste des clusters incrémentés par la fonction.
  * @return NULL.
  */
-//TODO faire un test avec des list et remove après chaque creation.
 void Cluster::clustering(std::map<int, std::vector<CaloHit*>>& hits, std::map<int, std::vector<Cluster*>>& outCluster) {
 
     for (auto &vectCaloHit : hits){
@@ -106,7 +105,7 @@ void Cluster::clustering(std::map<int, std::vector<CaloHit*>>& hits, std::map<in
                     maxJValue = it->getCellID()[1];
             }
 
-            ///On rejete les clusters dont la taille dépasse 3 ou componsé de trop de calohit
+            ///On rejete les clusters dont la taille dépasse 3 ou composés de trop de calohit
             if(caloHitSelected.size() <= 4 &&
                abs(maxIValue-minIValue+1) <= 3 &&
                abs(maxJValue-minJValue+1) <= 3){

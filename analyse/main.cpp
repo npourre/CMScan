@@ -1,7 +1,5 @@
 #include <iostream>
-#include <iostream>
 #include "TPolyLine3D.h"
-#include <vector>
 #include "TFile.h"
 #include "TTree.h"
 #include "TH1D.h"
@@ -9,86 +7,63 @@
 #include "TH2D.h"
 #include "TApplication.h"
 #include "TCanvas.h"
-#include <cmath>
-#include <chrono>
 #include <thread>
 #include "TGraph2D.h"
 #include <random>
 #include "caloHit.h"
 #include "Cluster.h"
 #include "analyse.h"
-#include "trace.h"
+#include "rootreader.h"
 
-//TODO ajouter les absorb
-//TODO prendre en compte la taille des pads
+//TODO doxygen...
+//TODO cree une classe write c'est pas du luxe...
 int Analyse::_size_pad=10;
 
-int main(int argc, char** argv) {
+int main(int argc, char* argv[]) {
 
-    Analyse::processGeometry();
     TApplication theApp("Analysis", &argc, argv);
 
-    auto *tCanvas=new TCanvas("tCanvas","tCanvas",1000,800);
+    RootReader reader;
+    if (argc == 1)
+        reader.Initialise();
+    else{
+        if (argc == 2)
+            reader.Initialise(argv[1]);
+    }
 
-    /*ouverture du fichier data.root creation de l'arbre et des branches*/
-    std::string fileName = "/data/data.root";
-    std::string treeName = "Tracker";
+    // Import geometry.json
+    Analyse::processGeometry();
 
-    auto* file = new TFile(fileName.c_str(),"READ");
-    if(file->IsZombie()) std::cout<<"Error opening file"<<std::endl;
-    else std::cout<<fileName<<" is open"<<std::endl;
-
-    auto* tree = new TTree();
-    file->GetObject(treeName.c_str(), tree);
-    if(!tree)std::cout<<"Error : access TTree impossible"<<std::endl;
-    else std::cout<<"Access TTree OK"<<std::endl;
-
-    TBranch* b_eventNb;
-    TBranch* b_chamberNb;
-    TBranch* b_X;
-    TBranch* b_Y;
-    TBranch* b_Z;
-    TBranch* b_Time;
-
-    Int_t _eventNb;
-    Int_t _chamberNb;
-    Double_t _X;
-    Double_t _Y;
-    Double_t _Z;
-    Double_t _Time;
-
-    tree->SetBranchAddress("eventNb",& _eventNb, & b_eventNb);
-    tree->SetBranchAddress("chamberNb",& _chamberNb, & b_chamberNb);
-    tree->SetBranchAddress("X",& _X, & b_X);
-    tree->SetBranchAddress("Y",& _Y, & b_Y);
-    tree->SetBranchAddress("Z",& _Z, & b_Z);
-    tree->SetBranchAddress("Time",& _Time, & b_Time);
-
-
-    /*random init*/
+    // random init
     long seed = std::chrono::steady_clock::now().time_since_epoch().count();
     std::mt19937 rand_engine(seed);
     std::uniform_real_distribution<double> real_distribution(0,1);
     std::uniform_int_distribution<int> multipli_distribution(1,4);
 
+    // Accumulateur pour les absorptions
+    auto *accumulator = new TH3D("absorber accumulator","absorber accumulator",100,0,1000,100,0,1000,240,-1200,1200);
+
     int size_pad = Analyse::_size_pad;
     std::map<int, std::vector<CaloHit*>> mapCaloHit;
     Int_t actual_event = 1;
-    Long64_t nbEntries = tree->GetEntries();
+
+    Long64_t nb_entries = reader.GetTreeSize();
+
     std::vector <mid_point> resultat;
 
-    /*boucle sur les valeurs de l'arbre*/
-    for (Long64_t i = 0; i < nbEntries; ++i) {
-        tree->GetEntry(i);
+    // boucle sur les valeurs de l'arbre
+    for (Long64_t i = 0; i < nb_entries; ++i) {
+        RawHit a_raw_hit = reader.GetEntry(i);
 
         ///Efficiency
         if (real_distribution(rand_engine)>0.95)
             continue;
 
-        ///Multiplicity
-        if(_eventNb != actual_event){
+        if(a_raw_hit.eventNb != actual_event){
             ///Calcul de la trace qu'il est tout nul et tout lent
-            actual_event=_eventNb;
+            if(a_raw_hit.eventNb%10000==0)
+                std::cout<<"event : "<<a_raw_hit.eventNb<<std::endl;
+            actual_event=a_raw_hit.eventNb;
             std::map<int, std::vector<Cluster*>> mapOfClusters;
             Cluster::clustering(mapCaloHit, mapOfClusters);
             std::map<int, std::vector<Cluster*>> upperCalo;
@@ -150,16 +125,6 @@ int main(int argc, char** argv) {
                     vectortemp[1][5]=lowerTrace[0]->getVectDirLine()[2];
                     resultat.push_back(findpoint(vectortemp));
 
-                    for (int j = 0; j < 6; ++j) {
-                        if(vectortemp[0][i]==0){
-                            std::cout<<"perdu"<<std::endl;
-                            display(mapCaloHit,mapOfClusters,lowerTrace,upperTrace);
-                        }
-                        if(vectortemp[1][i]==0){
-                            std::cout<<"perdu"<<std::endl;
-                            display(mapCaloHit,mapOfClusters,lowerTrace,upperTrace);
-                        }
-                    }
                     delete []vectortemp[0];
                     delete []vectortemp[1];
                     delete []vectortemp;
@@ -175,6 +140,28 @@ int main(int argc, char** argv) {
                 }
 
             }
+            if(upperCalo.size() >= 3 && lowerCalo.empty()){
+                std::vector<Trace*> upperTrace;
+                Trace::tracering(upperCalo, upperTrace);
+                double khi2;
+                bool nextEpisode = true;
+                if (!upperTrace.empty()){
+                    khi2 = upperTrace[0]->linearRegression();
+                    if (khi2==-1) {
+                        nextEpisode = false;
+                    }
+                }
+                else{
+                    nextEpisode = false;
+                }
+
+                if (nextEpisode){
+                    addAbsorb(upperTrace, accumulator);
+                }
+                for (auto &it : upperTrace){
+                    delete it;
+                }
+            }
             for (auto& it : mapOfClusters){
                 for (auto& vect : it.second)
                     delete vect;
@@ -186,24 +173,26 @@ int main(int argc, char** argv) {
                 vectCaloHit.second.clear();
             }
             mapCaloHit.clear();
-
         }
+        ///Multiplicity
         std::vector<std::pair<int, int>> vectPair;
-        std::pair<int, int> coord({(static_cast<int>(_X)+500)/size_pad, (static_cast<int>(_Y)+500)/size_pad});
+        std::pair<int, int> coord({(static_cast<int>(a_raw_hit.X)+500)/size_pad, (static_cast<int>(a_raw_hit.Y)+500)/size_pad});
         vectPair.push_back(coord);
 
         double multiTest = real_distribution(rand_engine);
         int multiplicity=1;
-        if(multiTest>0.809)
+        if(multiTest>0.809){
             multiplicity=3;
-        else
-        if(multiTest>0.476)
-            multiplicity=2;
+        }
+        else{
+            if(multiTest>0.476){
+                multiplicity=2;
+            }
+        }
+//        generateMulti(vectPair, multiplicity);
 
-        generateMulti(vectPair, multiplicity);
-
-        int k = _chamberNb;
-        auto time = static_cast<int>(_Time/(200e-9));
+        int k = a_raw_hit.chamberNb;
+        auto time = static_cast<int>(a_raw_hit.time/(200e-9));
 
         ///Add calohit
         for (auto &j : vectPair) {
@@ -211,39 +200,49 @@ int main(int argc, char** argv) {
             auto * aCaloHit = new CaloHit(tempPos, 1, time);
             mapCaloHit[k].push_back(aCaloHit);
         }
-
-        if(i>10000){
-            break;
-        }
-
     }
-    auto* histo3d = new TH3D("h3", "h3 title", 50, 0, 1000, 50, 0, 1000, 50, -500, 500);
-    auto* histo2dXZ = new TH2D("histo2dXZ", "histo2dXZ", 50, 0, 1000, 50, -500, 500);
-    auto* histo2dYZ = new TH2D("histo2dYZ", "histo2dYZ", 50, 0, 1000, 50, -500, 500);
-    for (auto& it : resultat) {
-        if(it.position[0] > 0 &&
-           it.position[0] < 1000 &&
-           it.position[1] > 0 &&
-           it.position[1] < 1000 &&
-           it.position[2] > -200 &&
-           it.position[2] < 200 &&
-           fabs(it.angle)>5*M_PI/180){
-            histo3d->Fill(it.position[0],it.position[1],it.position[2]);
-            histo2dXZ->Fill(it.position[0],it.position[2]);
-            histo2dYZ->Fill(it.position[1],it.position[2]);
-        }
+/*
+    auto *outputFile = new TFile("/data/data_0006.root","RECREATE");
+    if(!(outputFile->IsOpen()) || outputFile->IsZombie())
+        std::cout<<"Error : opening file"<<std::endl;
+    else
+        std::cout<<"outputFile file is open"<<std::endl;
+
+    double x;
+    double y;
+    double z;
+    double angle;
+
+    auto outputTree = new TTree("Hits","Hits");
+    outputTree->Branch("x",&x,"x/D");
+    outputTree->Branch("y",&y,"y/D");
+    outputTree->Branch("z",&z,"z/D");
+    outputTree->Branch("angle",&angle, "angle/D");
+    for (auto &midpoint : resultat){
+        x=midpoint.position[0];
+        y=midpoint.position[1];
+        z=midpoint.position[2];
+        angle=midpoint.angle;
+        outputTree->Fill();
     }
-    tCanvas->Divide(1,3);
+    outputTree->Write();
+*/
+    auto *tCanvas=new TCanvas("tCanvas","tCanvas",1000,800);
+    tCanvas->Divide(2,2);
     tCanvas->cd(1);
-    histo3d->Draw("BOX2Z");
+    accumulator->Draw("BOX2Z");
     tCanvas->cd(2);
-    histo2dXZ->Draw("colz");
+    accumulator->Project3D("yx")->Draw("colz");
     tCanvas->cd(3);
-    histo2dYZ->Draw("colz");
-
+    accumulator->Project3D("zy")->Draw("colz");
+    tCanvas->cd(4);
+    accumulator->Project3D("zx")->Draw("colz");
     theApp.Run(kTRUE);
+/*
+    delete outputTree;
+    delete outputFile;
+*/
     delete tCanvas;
-    delete tree;
-    delete file;
+
     return 0;
 }

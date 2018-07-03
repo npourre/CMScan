@@ -11,6 +11,7 @@
 #include "TTree.h"
 #include "Cluster.h"
 #include "trace.h"
+#include "TH3D.h"
 
 struct mid_point //Structure solution
 {
@@ -25,6 +26,7 @@ void display(std::map<int, std::vector<CaloHit*>>& mapCaloHit ,
              std::vector<Trace*>& lowerTrace,
              std::vector<Trace*>& upperTrace);
 mid_point findpoint (double** dataAB);
+void addAbsorb(std::vector<Trace*> &upperTrace, TH3D *accumulator);
 
 class Analyse {
 public :

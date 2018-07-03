@@ -11,4 +11,4 @@ INCLUDE_DIRECTORIES( SYSTEM ${ROOT_INCLUDE_DIRS} )
 LINK_LIBRARIES( ${ROOT_LIBRARIES} )
 ADD_DEFINITIONS( ${ROOT_DEFINITIONS} )
 
-add_executable(analyse main.cpp src/caloHit.cc include/caloHit.h src/Cluster.cc include/Cluster.h src/analyse.cc include/analyse.h src/trace.cc include/trace.h)
+add_executable(analyse main.cpp src/caloHit.cc include/caloHit.h src/Cluster.cc include/Cluster.h src/analyse.cc include/analyse.h src/trace.cc include/trace.h src/rootreader.cc include/rootreader.h)
