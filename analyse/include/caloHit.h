@@ -21,5 +21,4 @@ private:
     int _threshold;
     int _time;
 };
-
 #endif //ANALYSE_CALOHIT_H

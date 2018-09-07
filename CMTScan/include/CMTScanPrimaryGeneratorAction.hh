@@ -2,8 +2,8 @@
 #define CMTScanPrimaryGeneratorAction_h 1
 
 #include "G4VUserPrimaryGeneratorAction.hh"
-#include "G4ThreeVector.hh" 
-#include "G4DataVector.hh" 
+#include "G4ThreeVector.hh"
+#include "G4DataVector.hh"
 #include "G4ParticleTable.hh"
 #include "G4ParticleGun.hh"
 #include "Randomize.hh"
@@ -13,7 +13,6 @@
 #include "CRYParticle.h"
 #include "CRYUtils.h"
 #include "RNGWrapper.hh"
-#include "CMTScanPrimaryGeneratorMessenger.hh"
 #include <vector>
 
 class G4Event;

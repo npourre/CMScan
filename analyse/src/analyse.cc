@@ -20,7 +20,29 @@
 #include "TDecompSVD.h"
 #include <thread>
 #include "TH2D.h"
+#include "TDecompSVD.h"
 
+
+void addAbsorb(std::vector<Trace*> &upperTrace, TH3D *accumulator){
+    for (auto &trace : upperTrace) {
+
+        double x, y, z;
+        const double *pointLine = trace->getPointLine();
+        const double *vectDirLine = trace->getVectDirLine();
+        double norm = std::sqrt(
+                vectDirLine[0] * vectDirLine[0] + vectDirLine[1] * vectDirLine[1] + vectDirLine[2] * vectDirLine[2]);
+        double z0 = 1200;
+        double t0 = (z0 - pointLine[2]) / (vectDirLine[2] / norm);
+        int i = 0;
+        do {
+            x = pointLine[0] + (i * 10 + t0) * vectDirLine[0] / norm;
+            y = pointLine[1] + (i * 10 + t0) * vectDirLine[1] / norm;
+            z = pointLine[2] + (i * 10 + t0) * vectDirLine[2] / norm;
+            accumulator->Fill(x, y, z);
+            i++;
+        } while (z > -1200);
+    }
+}
 
 std::pair<int, int> addPair(std::pair<int, int> p1, std::pair<int, int> p2){
     std::pair<int, int> p({p1.first+p2.first, p1.second+p2.second});
@@ -43,7 +65,6 @@ void generateMulti(std::vector<std::pair<int, int>>& vectPair, int multi){
 }
 
 std::map<int, double> Analyse::_geometryMap={};
-//TODO changer fopen
 void Analyse::processGeometry() {
     _geometryMap.clear();
     FILE* fp = fopen("../geometry/geometry.json", "r");
@@ -79,8 +100,8 @@ void display(std::map<int, std::vector<CaloHit*>>& mapCaloHit ,
     auto *graph_calohit = new TGraph2D();
     auto *graph_rootsux = new TGraph2D();
 
-    graph_rootsux->SetPoint(0,0,0,-400);
-    graph_rootsux->SetPoint(1,1000,1000, 400);
+    graph_rootsux->SetPoint(0,0,0,-1804);
+    graph_rootsux->SetPoint(1,1000,1000, 1804);
 
     int size_pad = Analyse::_size_pad;
     int i = 0;
@@ -230,7 +251,7 @@ mid_point findpoint (Trace* upperTrace, Trace* lowerTrace)
     dec.Invert(Coeff);
     Sol=Coeff*vB; //Résolution du SystemeLineaire
 
-    //On cherche les coordonnées du point du milieu
+  //On cherche les coordonnées du point du milieu
     TVectorT <double> Mid (3);
     Mid(0)=(Sol(0)+Sol(3))/2.;
     Mid(1)=(Sol(1)+Sol(4))/2.;

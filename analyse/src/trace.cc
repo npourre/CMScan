@@ -17,7 +17,7 @@
 #include "TGraph2D.h"
 
 #include "TH2D.h"
-
+//TODO normé le vecteur dir et positionner le 0 puis faire les changement dans tout le code
 Trace::Trace(std::vector<Cluster*> &traceHitList) :
         _clusterVec{},
         _pointLine{},
@@ -54,7 +54,7 @@ void Trace::tracering(std::map<int, std::vector<Cluster*> > &mapOfClusters, std:
                         linePlanYZ,
                         clusterVec->getPosition()[0],
                         clusterVec->getPosition()[1],
-                        clusterVec->getPosition()[2]) < 100) {
+                        clusterVec->getPosition()[2]) < 1000000000) {
                 traceHitList.push_back(clusterVec);
             }
         }
@@ -132,7 +132,7 @@ std::pair<double,double> Trace::processHough(std::vector<double>& x, std::vector
     delete accumulator;
     return std::make_pair(a, b);
 }
-
+//TODO ca marche pas.... idem pour le khi2
 //Si l'espace est muni d'un repère orthonormé, si la droite (d ) passe par le point B
 // et a pour vecteur directeur u → {\displaystyle {\vec {u}}} {\vec {u}},
 // la distance entre le point A et la droite (d) est donnée par la formule d= norm(BA vect u)/norm(u)
@@ -151,16 +151,7 @@ double Trace::distance(std::pair<double,double> linePlanXZ, std::pair<double,dou
 }
 
 double Trace::linearRegression() {
-
-    double Xm=0;
-    double Ym=0;
-    double Zm=0;
-    double Sxx=0;
-    double Sxy=0;
-    double Syy=0;
-    double Sxz=0;
-    double Szz=0;
-    double Syz=0;
+//TODO rend propre ce tas de merde
     double theta=0;
     double K11=0;
     double K22=0;
@@ -181,22 +172,17 @@ double Trace::linearRegression() {
     double u=0;
     double v=0;
     double w=0;
-/*
-    //Visualisation des traces et des clusters
-    auto *tCanvas=new TCanvas("tCanvas","tCanvas",1000,800);
-    auto *l1 = new TPolyLine3D();
-    auto *graph = new TGraph2D();
-    int compteur=0;
-    for (auto& it : _clusterVec){
-        graph->SetPoint(compteur, it->getPosition()[0], it->getPosition()[1], it->getPosition()[2]);
-        compteur++;
-    }
-    graph->SetPoint(compteur,1000,1000,500);
-    graph->SetPoint(compteur+1,000,000,-500);
-    // Fin Visu
-*/
 
-    unsigned int nd=0;
+    double Xm=0;
+    double Ym=0;
+    double Zm=0;
+    double Sxx=0;
+    double Sxy=0;
+    double Syy=0;
+    double Sxz=0;
+    double Szz=0;
+    double Syz=0;
+    int nd=0;
     for (auto& it : _clusterVec) {
         Xm += it->getPosition()[0];
         Ym += it->getPosition()[1];
@@ -251,14 +237,56 @@ double Trace::linearRegression() {
     v=(1/(1+a*a+b*b))*(-a*b*Xm+(1+a*a)*Ym+b*Zm);
     w=(1/(1+a*a+b*b))*(a*Xm+b*Ym+(a*a+b*b)*Zm);
 
-    _vectDirLine[0] = u-Xm;
-    _pointLine[0] = u;
-    _vectDirLine[1] = v-Ym;
-    _pointLine[1] = v;
-    _vectDirLine[2] = w-Zm;
-    _pointLine[2] = w;
+
+    if (w-Zm < 0) {
+        _vectDirLine[0] = u-Xm;
+        _pointLine[0] = u;
+        _vectDirLine[1] = v-Ym;
+        _pointLine[1] = v;
+        _vectDirLine[2] = w-Zm;
+        _pointLine[2] = w;
+    } else {
+        _vectDirLine[0] = -u+Xm;
+        _pointLine[0] = u;
+        _vectDirLine[1] = -v+Ym;
+        _pointLine[1] = v;
+        _vectDirLine[2] = -w+Zm;
+        _pointLine[2] = w;
+    }
+
+    double khi2 = 0;
+    for (auto& it : _clusterVec) {
+        double t = (it->getPosition()[2] - _pointLine[2]) / _vectDirLine[2];
+        double deltaX = (t * _vectDirLine[0] + _pointLine[0]) - it->getPosition()[0];
+        double deltaY = (t * _vectDirLine[1] + _pointLine[1]) - it->getPosition()[1];
+        khi2 += deltaX * deltaX / (it->getSizeClusterX()*Analyse::_size_pad * it->getSizeClusterX()*Analyse::_size_pad / 12.) +
+                deltaY * deltaY / (it->getSizeClusterY()*Analyse::_size_pad * it->getSizeClusterY()*Analyse::_size_pad / 12.);
+    }
+    khi2 /= _clusterVec.size();
+
+    if (std::isnan(khi2)){
+        _pointLine[0]=_clusterVec[0]->getPosition()[0];
+        _pointLine[1]=_clusterVec[0]->getPosition()[1];
+        _pointLine[2]=_clusterVec[0]->getPosition()[2];
+        _vectDirLine[0]=0;
+        _vectDirLine[1]=0;
+        _vectDirLine[2]=1;
+        khi2 = 0;
+    }
+//TODO cree un truc pour visualiser
 /*
-    //Visualisation des traces et des clusters
+    ///Visualisation des traces et des clusters
+    if(khi2>8){
+    auto *tCanvas=new TCanvas("tCanvas","tCanvas",1000,800);
+    auto *l1 = new TPolyLine3D();
+    auto *graph = new TGraph2D();
+    int compteur=0;
+    for (auto& it : _clusterVec){
+        graph->SetPoint(compteur, it->getPosition()[0], it->getPosition()[1], it->getPosition()[2]);
+        compteur++;
+    }
+    graph->SetPoint(compteur,1000,1000,1804);
+    graph->SetPoint(compteur+1,000,000,-1804);
     Double_t x,y,z;
     double norm = std::sqrt(_vectDirLine[0]*_vectDirLine[0]+_vectDirLine[1]*_vectDirLine[1]+_vectDirLine[2]*_vectDirLine[2]);
     double z0;
@@ -282,28 +310,15 @@ double Trace::linearRegression() {
     graph->GetZaxis()->SetRange(0,600);
     l1->SetLineColor(kRed);
     l1->Draw("SAME");
+
     tCanvas->Update();
     std::this_thread::sleep_for(std::chrono::milliseconds(2000));
     delete graph;
     delete l1;
     delete tCanvas;
-    // Fin Visu
-*/
-    double khi2 = 0;
-    for (auto& it : _clusterVec) {
-        double t = (it->getPosition()[2] - _pointLine[2]) / _vectDirLine[2];
-        double deltaX = (t * _vectDirLine[0] + _pointLine[0]) -
-                        it->getPosition()[0];
-        double deltaY = (t * _vectDirLine[1] + _pointLine[1]) -
-                        it->getPosition()[1];
-        khi2 += deltaX * deltaX / (it->getSizeClusterX()*10.408 * it->getSizeClusterX()*10.408 / 12.) +
-                deltaY * deltaY / (it->getSizeClusterY()*10.408 * it->getSizeClusterY()*10.408 / 12.);
+    /// Fin Visu
     }
-    khi2 /= _clusterVec.size();
-
-    if (std::isnan(khi2) || khi2 >5)
-        khi2 = -1;
-
+*/
     return khi2;
 }
 
